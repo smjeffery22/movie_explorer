@@ -21,7 +21,7 @@ const PopularList = () => {
 	};
 
 	return (
-		<div className="content">
+		<div className="movie-container">
 			{popular.map((movie) => {
 				return <PopularListItem key={movie.id} movie={movie} />;
 			})}
