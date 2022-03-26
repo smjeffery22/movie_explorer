@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import PopularListItem from './PopularListItem';
+import Filter from '../filter/Filter';
 import './PopularList.scss';
 
 const PopularList = () => {
@@ -22,9 +23,12 @@ const PopularList = () => {
 
 	return (
 		<div className="movie-container">
-			{popular.map((movie) => {
-				return <PopularListItem key={movie.id} movie={movie} />;
-			})}
+			<Filter />
+			<div className="movie-list">
+				{popular.map((movie) => {
+					return <PopularListItem key={movie.id} movie={movie} />;
+				})}
+			</div>
 		</div>
 	);
 };

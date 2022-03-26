@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './components/navbar/Navbar';
-import PopularList from './components/PopularList';
+import PopularList from './components/list/PopularList';
 import './App.scss';
 
 function App() {
