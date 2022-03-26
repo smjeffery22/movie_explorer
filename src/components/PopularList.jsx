@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import PopularListItem from './PopularListItem';
+import './PopularList.scss';
 
 const PopularList = () => {
 	const [popular, setPopular] = useState([]);
@@ -20,7 +21,7 @@ const PopularList = () => {
 	};
 
 	return (
-		<div>
+		<div className="content">
 			{popular.map((movie) => {
 				return <PopularListItem key={movie.id} movie={movie} />;
 			})}
