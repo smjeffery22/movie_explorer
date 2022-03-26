@@ -1,0 +1,19 @@
+@import '../../styles/variables';
+
+.navbar {
+  width: 100vw;
+  background-color: $background-color;
+  position: fixed;
+  // background: linear-gradient(to top, transparent 0%, rgb(0, 0, 0, 0.3) 50%);
+  
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 50px;
+    margin: 0 auto;
+    // padding: 1rem;
+    // background-color: lightcoral;
+  }
+}
