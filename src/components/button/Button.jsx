@@ -1,10 +1,15 @@
-import React from 'react'
+import React from 'react';
 import './Button.scss';
 
-const Button = ({ name }) => {
-  return (
-    <div className='button-genre active'>{name}</div>
-  )
-}
+const Button = ({ name, genreId, genreName, activeGenre, setActiveGenre }) => {
+	return (
+		<div
+			className="button-genre active"
+			onClick={() => setActiveGenre(genreId)}
+		>
+			{genreName}
+		</div>
+	);
+};
 
-export default Button
+export default Button;

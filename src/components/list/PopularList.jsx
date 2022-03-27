@@ -6,13 +6,25 @@ import './PopularList.scss';
 
 const PopularList = () => {
 	const [popular, setPopular] = useState([]);
+	const [filtered, setFiltered] = useState([]);
 	const [genres, setGenres] = useState([]);
+	const [activeGenre, setActiveGenre] = useState(0);
 
 	useEffect(() => {
 		fetchPopular();
 		fetchGenres();
 	}, []);
 
+	useEffect(() => {
+		// filter movies by genre
+		const filteredByGenre = popular.filter((movie) => {
+			return movie.genre_ids.includes(activeGenre);
+		});
+
+		setFiltered(filteredByGenre);
+	}, [activeGenre]);
+
+	// fetch popular movies from api
 	const fetchPopular = async () => {
 		const baseUrl = 'https://api.themoviedb.org/3';
 		const path = '/movie/popular';
@@ -21,8 +33,10 @@ const PopularList = () => {
 		);
 
 		setPopular(popularMovies.data.results);
+		setFiltered(popularMovies.data.results);
 	};
 
+	// fetch movie genres data from api
 	const fetchGenres = async () => {
 		const baseUrl = 'https://api.themoviedb.org/3';
 		const path = '/genre/movie/list';
@@ -35,9 +49,14 @@ const PopularList = () => {
 
 	return (
 		<div className="movie-container">
-			<Filter genres={genres} />
+			<Filter
+				genres={genres}
+				activeGenre={activeGenre}
+				setActiveGenre={setActiveGenre}
+				setFiltered={setFiltered}
+			/>
 			<div className="movie-list">
-				{popular.map((movie) => {
+				{filtered.map((movie) => {
 					return <PopularListItem key={movie.id} movie={movie} />;
 				})}
 			</div>
