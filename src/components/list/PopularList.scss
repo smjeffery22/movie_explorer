@@ -3,13 +3,13 @@
   flex-direction: column;
   justify-content: center;
   // align-items: center;
-  width: 90%;
+  width: 80%;
   margin: 50px auto;
 
   
   .movie-list {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     flex-wrap: wrap;
     margin: 0 auto;
   }

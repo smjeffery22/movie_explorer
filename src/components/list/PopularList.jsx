@@ -6,10 +6,11 @@ import './PopularList.scss';
 
 const PopularList = () => {
 	const [popular, setPopular] = useState([]);
+	const [genres, setGenres] = useState([]);
 
 	useEffect(() => {
 		fetchPopular();
-		console.log(popular);
+		fetchGenres();
 	}, []);
 
 	const fetchPopular = async () => {
@@ -18,12 +19,23 @@ const PopularList = () => {
 		const popularMovies = await axios.get(
 			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
 		);
+
 		setPopular(popularMovies.data.results);
+	};
+
+	const fetchGenres = async () => {
+		const baseUrl = 'https://api.themoviedb.org/3';
+		const path = '/genre/movie/list';
+		const genres = await axios.get(
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+		);
+
+		setGenres(genres.data.genres);
 	};
 
 	return (
 		<div className="movie-container">
-			<Filter />
+			<Filter genres={genres} />
 			<div className="movie-list">
 				{popular.map((movie) => {
 					return <PopularListItem key={movie.id} movie={movie} />;
