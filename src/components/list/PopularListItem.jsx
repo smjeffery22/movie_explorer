@@ -8,6 +8,7 @@ const PopularListItem = ({ movie }) => {
 			<motion.div
 				className="movie-item"
 				whileHover={{ scale: 1.2 }}
+				whileTap={{ scale: 1.1 }}
         animate={{ opacity: 1 }}
 				initial={{ opacity: 0 }}
         exit={{ opacity: 0 }}
