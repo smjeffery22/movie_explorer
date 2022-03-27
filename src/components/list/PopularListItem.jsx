@@ -39,7 +39,7 @@ const PopularListItem = ({ movie }) => {
 				exitBeforeEnter={true}
 				onExitComplete={() => null}
 			>
-				{modalOpen && <MovieModal modalOpen={modalOpen} handleClose={close} />}
+				{modalOpen && <MovieModal movie={movie} modalOpen={modalOpen} handleClose={close} />}
 			</AnimatePresence>
 		</AnimatePresence>
 	);
