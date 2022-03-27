@@ -27,7 +27,7 @@ import './MovieModal.scss';
 const MovieModal = ({ movie, handleClose, text }) => {
 	// set background of the modal to movie poster
 	const backgroundStyle = {
-		background: `linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+		background: `linear-gradient(rgba(20,20,20,0.5), rgba(20,20,20,0.5)), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
 		backgroundSize: '100% 100%',
 	};
 
@@ -45,13 +45,18 @@ const MovieModal = ({ movie, handleClose, text }) => {
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
 			>
-				{/* <img
-					className="modal-movie-poster"
-					src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-					alt=""
-				/> */}
-				<p>Hello</p>
-				<button onClick={handleClose}>Close</button>
+				<div className="modal-movie-detail-container">
+					<h1 className="modal-movie-detail-heading">
+						<span>Title</span>
+						<span>Year</span>
+						<span>Rating</span>
+					</h1>
+					<h3 className="modal-movie-detail-subheading">
+						<span>Release Date</span>
+						<span>Genre</span>
+						<span>Runtime</span>
+					</h3>
+				</div>
 			</motion.div>
 		</Backdrop>
 	);
