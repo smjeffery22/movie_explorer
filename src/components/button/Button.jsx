@@ -1,7 +1,7 @@
 import React from 'react';
 import './Button.scss';
 
-const Button = ({ name, genreId, genreName, activeGenre, setActiveGenre }) => {
+const Button = ({ name, genreId, genreName, setActiveGenre }) => {
 	return (
 		<div
 			className="button-genre active"

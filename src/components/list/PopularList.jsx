@@ -15,7 +15,10 @@ const PopularList = () => {
 		fetchGenres();
 	}, []);
 
+	// re-render when the value of activeGenre changes
 	useEffect(() => {
+		if (activeGenre === 0) return setFiltered(popular);
+
 		// filter movies by genre
 		const filteredByGenre = popular.filter((movie) => {
 			return movie.genre_ids.includes(activeGenre);
