@@ -1,7 +1,9 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { motion, AnimatePresence } from 'framer-motion';
 import Backdrop from '../backdrop/Backdrop';
 import './MovieModal.scss';
+import { type } from '@testing-library/user-event/dist/type';
 
 // const dropIn = {
 // 	hidden: {
@@ -24,7 +26,33 @@ import './MovieModal.scss';
 // 	},
 // };
 
-const MovieModal = ({ movie, handleClose, text }) => {
+const MovieModal = ({ movie, handleClose }) => {
+	const [details, setDetails] = useState({});
+
+	useEffect(() => {
+		// fetch movie details from api
+		const fetchDetails = async () => {
+			const baseUrl = 'https://api.themoviedb.org/3';
+			const path = `/movie/${movie.id}`;
+			const details = await axios.get(
+				`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+			);
+
+			setDetails(details.data); // move details data in object
+		};
+
+		fetchDetails();
+	}, []);
+
+  // convert total runtime from minute to hour and minute
+  const convertRuntime = () => {
+    const totalRuntime = details.runtime;
+    const hour = Math.floor(totalRuntime / 60);
+    const mins = totalRuntime - (hour * 60);
+
+    return `${hour} h ${mins} m`
+  }
+
 	// set background of the modal to movie poster
 	const backgroundStyle = {
 		background: `linear-gradient(rgba(20,20,20,0.5), rgba(20,20,20,0.5)), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
@@ -47,15 +75,24 @@ const MovieModal = ({ movie, handleClose, text }) => {
 			>
 				<div className="modal-movie-detail-container">
 					<h1 className="modal-movie-detail-heading">
-						<span>Title</span>
-						<span>Year</span>
-						<span>Rating</span>
+						<span>{movie.title}</span>
+						<span>({movie.release_date.slice(0, 4)})</span>
 					</h1>
-					<h3 className="modal-movie-detail-subheading">
-						<span>Release Date</span>
-						<span>Genre</span>
-						<span>Runtime</span>
-					</h3>
+					<div className="modal-movie-detail-subheading">
+						<span>{movie.release_date}</span>
+						<span><strong>&#183;</strong></span>
+						{Object.keys(details).length !== 0 &&
+							details.genres.map((genre) => {
+								return <span>{genre.name}</span>
+							})}
+						<span><strong>&#183;</strong></span>
+						{(details.runtime < 60) && <span>{details.runtime}</span>}
+						{(details.runtime > 60) && <span>{convertRuntime()}</span>}
+					</div>
+					<div className="modal-movie-detail-overview">
+						<h3>Overview</h3>
+						<p>{movie.overview}</p>
+					</div>
 				</div>
 			</motion.div>
 		</Backdrop>

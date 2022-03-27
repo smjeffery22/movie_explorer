@@ -1,10 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import axios from 'axios';
 import MovieModal from '../modal/MovieModal';
 import './PopularListItem.scss';
 
 const PopularListItem = ({ movie }) => {
 	const [modalOpen, setModalOpen] = useState(false);
+	// const [details, setDetails] = useState({});
+
+	// useEffect(() => {
+  //   fetchDetails();
+  // }, [modalOpen]);
+
+	// // fetch movie details from api
+	// const fetchDetails = async () => {
+	// 	const baseUrl = 'https://api.themoviedb.org/3';
+	// 	const path = `/movie/${movie.id}`;
+	// 	const details = await axios.get(
+	// 		`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+	// 	);
+
+	// 	setDetails(details.data); // move details data in object
+	// };
 
 	const open = () => setModalOpen(true);
 	const close = () => setModalOpen(false);
