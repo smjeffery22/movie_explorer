@@ -12,7 +12,8 @@
 	font-size: 0.8rem;
 	cursor: pointer;
 
-	&:hover {
+	&:hover,
+  &.active {
 		background-color: $background-color;
 		color: $text-color;
 		border: 2px solid $text-color;

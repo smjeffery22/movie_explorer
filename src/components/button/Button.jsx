@@ -1,10 +1,10 @@
 import React from 'react';
 import './Button.scss';
 
-const Button = ({ name, genreId, genreName, setActiveGenre }) => {
+const Button = ({ genreId, genreName, activeGenre, setActiveGenre }) => {
 	return (
 		<div
-			className="button-genre active"
+			className={`button-genre ${activeGenre === genreId ? 'active' : ''}`}
 			onClick={() => setActiveGenre(genreId)}
 		>
 			{genreName}

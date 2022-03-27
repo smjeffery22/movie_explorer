@@ -9,6 +9,7 @@ const Filter = ({ genres, activeGenre, setActiveGenre }) => {
 				key={0}
 				genreId={0}
 				genreName="All"
+				activeGenre={activeGenre}
 				setActiveGenre={setActiveGenre}
 			/>
 			{genres.map((genre) => {
@@ -17,6 +18,7 @@ const Filter = ({ genres, activeGenre, setActiveGenre }) => {
 						key={genre.id}
 						genreId={genre.id}
 						genreName={genre.name}
+						activeGenre={activeGenre}
 						setActiveGenre={setActiveGenre}
 					/>
 				);
