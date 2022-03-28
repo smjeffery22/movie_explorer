@@ -4,8 +4,6 @@ import ListItem from '../ListItem';
 import Filter from '../../filter/Filter';
 import './PopularList.scss';
 
-
-
 const PopularList = () => {
 	const [popular, setPopular] = useState([]);
 	const [filtered, setFiltered] = useState([]);
@@ -33,15 +31,33 @@ const PopularList = () => {
 	const fetchPopular = async () => {
 		const baseUrl = 'https://api.themoviedb.org/3';
 		const path = '/movie/popular';
-		const popularMovies = await axios.get(
+		const popularMovies1 = await axios.get(
 			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
 		);
+		const popularMovies2 = await axios.get(
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=2`
+		);
+		
+		// combine movie data returned from axios calls
+		const movieData = [...popularMovies1.data.results, ...popularMovies2.data.results];
+		const uniqueMovieIds = [];
+		
+		// filter out duplicate movies from the API data
+		//	bug in API data
+		const filteredPopularMovies = movieData.filter((movie) => {
+			const isDuplicate = uniqueMovieIds.includes(movie.id);
 
-		// const popularMovies = await axios.get(requests.fetchPopular);
-		// console.log(popularMovies)
+			// push id if not already in uniqueMovieIds array
+			if (!isDuplicate) {
+				uniqueMovieIds.push(movie.id);
 
-		setPopular(popularMovies.data.results);
-		setFiltered(popularMovies.data.results);
+				// filter only adds an element to the return array for truthy value
+				return true;
+			}
+		});
+
+		setPopular(filteredPopularMovies);
+		setFiltered(filteredPopularMovies);
 	};
 
 	// fetch movie genres data from api

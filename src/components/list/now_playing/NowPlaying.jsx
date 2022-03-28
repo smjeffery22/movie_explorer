@@ -4,8 +4,6 @@ import ListItem from '../ListItem';
 import Filter from '../../filter/Filter';
 import './NowPlaying.scss';
 
-
-
 const NowPlaying = () => {
 	const [nowPlaying, setNowPlaying] = useState([]);
 	const [filtered, setFiltered] = useState([]);
@@ -33,12 +31,36 @@ const NowPlaying = () => {
 	const fetchNowPlayinig = async () => {
 		const baseUrl = 'https://api.themoviedb.org/3';
 		const path = '/movie/now_playing';
-		const nowPlayingMovies = await axios.get(
+		const nowPlayingMovies1 = await axios.get(
 			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
 		);
+		const nowPlayingMovies2 = await axios.get(
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=2`
+		);
 
-		setNowPlaying(nowPlayingMovies.data.results);
-		setFiltered(nowPlayingMovies.data.results);
+		// combine movie data returned from axios calls
+		const movieData = [
+			...nowPlayingMovies1.data.results,
+			...nowPlayingMovies2.data.results,
+		];
+		const uniqueMovieIds = [];
+
+		// filter out duplicate movies from the API data
+		//	bug in API data
+		const filteredNowPlayingMovies = movieData.filter((movie) => {
+			const isDuplicate = uniqueMovieIds.includes(movie.id);
+
+			// push id if not already in uniqueMovieIds array
+			if (!isDuplicate) {
+				uniqueMovieIds.push(movie.id);
+
+				// filter only adds an element to the return array for truthy value
+				return true;
+			}
+		});
+
+		setNowPlaying(filteredNowPlayingMovies);
+		setFiltered(filteredNowPlayingMovies);
 	};
 
 	// fetch movie genres data from api
