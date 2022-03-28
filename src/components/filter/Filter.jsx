@@ -8,18 +8,20 @@ const Filter = ({ genres, activeGenre, setActiveGenre }) => {
 			<Button
 				key={0}
 				genreId={0}
-				genreName="All"
+				children="All"
 				activeGenre={activeGenre}
-				setActiveGenre={setActiveGenre}
+				// setActiveGenre={setActiveGenre}
+				onClick={() => setActiveGenre(0)}
 			/>
 			{genres.map((genre) => {
 				return (
 					<Button
 						key={genre.id}
 						genreId={genre.id}
-						genreName={genre.name}
+						children={genre.name}
 						activeGenre={activeGenre}
-						setActiveGenre={setActiveGenre}
+						// setActiveGenre={setActiveGenre}
+						onClick={() => setActiveGenre(genre.id)}
 					/>
 				);
 			})}

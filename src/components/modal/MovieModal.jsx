@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 import { motion, AnimatePresence } from 'framer-motion';
+import Button from '../button/Button';
 import Backdrop from '../backdrop/Backdrop';
 import './MovieModal.scss';
 import { type } from '@testing-library/user-event/dist/type';
@@ -31,6 +32,7 @@ const MovieModal = ({ movie, handleClose }) => {
 	const [details, setDetails] = useState({});
 	const [casts, setCasts] = useState([]);
 	const [crews, setCrews] = useState([]);
+  const [playTrailer, setPlayTrailer] = useState(false);
 
 	useEffect(() => {
 		fetchDetails();
@@ -124,8 +126,13 @@ const MovieModal = ({ movie, handleClose }) => {
 			>
 				<div className="modal-movie-detail-container">
 					<h1 className="modal-movie-detail-heading">
+            <div>
 						<span>{movie.title}</span>
 						<span>({movie.release_date.slice(0, 4)})</span>
+            </div>
+            <div className="modal-movie-detail-trailer-button">
+              <Button>Play Trailer</Button>
+            </div>
 					</h1>
 					<div className="modal-movie-detail-subheading">
 						<span>{movie.release_date}</span>
@@ -156,7 +163,7 @@ const MovieModal = ({ movie, handleClose }) => {
 					</div>
 				</div>
         <div>
-        {details.videos && getTrailer()}
+        {details.videos && playTrailer ? getTrailer() : null}
         </div>
 			</motion.div>
 		</Backdrop>
