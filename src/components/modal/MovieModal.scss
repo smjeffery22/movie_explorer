@@ -43,12 +43,6 @@
 			font-size: 0.9rem;
 			font-style: italic;
 			font-weight: 300;
-
-			.modal-movie-detail-director {
-			}
-
-			.modal-movie-detail-casts {
-			}
 		}
 
 		.modal-movie-detail-overview {
@@ -65,18 +59,26 @@
 
 .modal-movie-detail-trailer {
   display: flex;
-  flex-direction: column;
   justify-content: center;
 	align-items: center;
 	position: fixed;
-	top: auto;
-	left: auto;
+	// top: auto;
+	// left: auto;
   width: 50%;
   height: 50%;
 
-  &.no-trailer {
+  .trailer-youtube {
     width: 100%;
     height: 100%;
+  }
+
+  .no-trailer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
     background-color: #000000e1;
   }
 }

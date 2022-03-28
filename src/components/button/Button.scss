@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .button-genre {
-  margin: 0.25rem;
+	margin: 0.25rem;
 	padding: 0.5em 1em;
 	background-color: $background-color;
 	color: $text-color;
@@ -13,9 +13,8 @@
 
 	&:hover {
 		background-color: #454545;
-
 	}
-  &.active {
+	&.active {
 		background-color: $text-color;
 		color: $background-color;
 		border: 2px solid $text-color;
@@ -43,5 +42,23 @@
 
 	&:active {
 		transform: scale(0.98);
+	}
+}
+
+.button-close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 0.6em;
+	background-color: $background-color;
+	color: $text-color;
+	border-radius: 100%;
+	// border: 2px solid #6c757d;
+	font-weight: bold;
+	font-size: 1.1rem;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #454545;
 	}
 }

@@ -3,6 +3,8 @@ import axios from 'axios';
 import YouTube from 'react-youtube';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay } from 'react-icons/fa';
+import { AiOutlineClose } from "react-icons/ai";
+
 import Button from '../button/Button';
 import Backdrop from '../backdrop/Backdrop';
 import './MovieModal.scss';
@@ -104,21 +106,24 @@ const MovieModal = ({ movie, handleClose }) => {
 
 		if (trailer) {
 			return (
-				<YouTube
-					containerClassName="modal-movie-detail-trailer"
-					videoId={trailer.key}
-					opts={{
-						height: '100%',
-						width: '100%',
-						autoplay: 0,
-					}}
-				/>
+				<div className="modal-movie-detail-trailer">
+					{/* <Button close="button-close">X</Button> */}
+					<YouTube
+						containerClassName="trailer-youtube"
+						videoId={trailer.key}
+						opts={{
+							width: '100%',
+							height: '100%',
+						}}
+					/>
+				</div>
 			);
 		} else {
 			return (
-				<h1 className="modal-movie-detail-trailer no-trailer">
-					Sorry, no trailer available...
-				</h1>
+				<div className="modal-movie-detail-trailer">
+					{/* <Button close="button-close" onClick={() => console.log('Close')}>X</Button> */}
+					<h1 className="no-trailer">Sorry, no trailer available...</h1>
+				</div>
 			);
 		}
 	};
