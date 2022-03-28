@@ -10,7 +10,6 @@ const Filter = ({ genres, activeGenre, setActiveGenre }) => {
 				genreId={0}
 				children="All"
 				activeGenre={activeGenre}
-				// setActiveGenre={setActiveGenre}
 				onClick={() => setActiveGenre(0)}
 			/>
 			{genres.map((genre) => {
@@ -20,7 +19,6 @@ const Filter = ({ genres, activeGenre, setActiveGenre }) => {
 						genreId={genre.id}
 						children={genre.name}
 						activeGenre={activeGenre}
-						// setActiveGenre={setActiveGenre}
 						onClick={() => setActiveGenre(genre.id)}
 					/>
 				);

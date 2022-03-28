@@ -5,7 +5,6 @@ const Button = ({ genreId, children, activeGenre, onClick }) => {
 	return (
 		<div
 			className={`button-genre ${activeGenre === genreId ? 'active' : ''}`}
-			// onClick={() => setActiveGenre(genreId)}
 			onClick={onClick}
 		>
 			{children}
