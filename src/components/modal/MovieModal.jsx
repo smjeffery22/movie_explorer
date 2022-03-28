@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FaPlay } from 'react-icons/fa';
 import Button from '../button/Button';
 import Backdrop from '../backdrop/Backdrop';
 import './MovieModal.scss';
@@ -32,7 +33,7 @@ const MovieModal = ({ movie, handleClose }) => {
 	const [details, setDetails] = useState({});
 	const [casts, setCasts] = useState([]);
 	const [crews, setCrews] = useState([]);
-  const [playTrailer, setPlayTrailer] = useState(false);
+	const [playTrailer, setPlayTrailer] = useState(false);
 
 	useEffect(() => {
 		fetchDetails();
@@ -95,14 +96,32 @@ const MovieModal = ({ movie, handleClose }) => {
 		return fiveCasts.join(', ');
 	};
 
-  // get movie trailer
-  const getTrailer = () => {
-    const trailer = details.videos.results.find(video => video.name === 'Official Trailer');
+	// get movie trailer
+	const getTrailer = () => {
+		const trailer = details.videos.results.find(
+			(video) => video.name === 'Official Trailer'
+		);
 
-    return (
-      <YouTube containerClassName="modal-movie-detail-trailer" videoId={trailer.key} />
-    );
-  };
+		if (trailer) {
+			return (
+				<YouTube
+					containerClassName="modal-movie-detail-trailer"
+					videoId={trailer.key}
+					opts={{
+						height: '100%',
+						width: '100%',
+						autoplay: 0,
+					}}
+				/>
+			);
+		} else {
+			return (
+				<h1 className="modal-movie-detail-trailer no-trailer">
+					Sorry, no trailer available...
+				</h1>
+			);
+		}
+	};
 
 	// set background of the modal to movie poster
 	const backgroundStyle = {
@@ -126,13 +145,18 @@ const MovieModal = ({ movie, handleClose }) => {
 			>
 				<div className="modal-movie-detail-container">
 					<h1 className="modal-movie-detail-heading">
-            <div>
-						<span>{movie.title}</span>
-						<span>({movie.release_date.slice(0, 4)})</span>
-            </div>
-            <div className="modal-movie-detail-trailer-button">
-              <Button>Play Trailer</Button>
-            </div>
+						<div>
+							<span>{movie.title}</span>
+							<span>({movie.release_date.slice(0, 4)})</span>
+						</div>
+						<div className="modal-movie-detail-trailer-button">
+							<Button
+								trailer="button-trailer"
+								onClick={() => setPlayTrailer(true)}
+							>
+								<FaPlay className="play-button" /> Play Trailer
+							</Button>
+						</div>
 					</h1>
 					<div className="modal-movie-detail-subheading">
 						<span>{movie.release_date}</span>
@@ -162,10 +186,8 @@ const MovieModal = ({ movie, handleClose }) => {
 						<p>{movie.overview}</p>
 					</div>
 				</div>
-        <div>
-        {details.videos && playTrailer ? getTrailer() : null}
-        </div>
 			</motion.div>
+			{details.videos && playTrailer ? getTrailer() : null}
 		</Backdrop>
 	);
 };

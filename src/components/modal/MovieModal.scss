@@ -20,47 +20,63 @@
 		margin: auto;
 
 		.modal-movie-detail-heading {
-      display: flex;
-      justify-content: space-between;
+			display: flex;
+			justify-content: space-between;
 			margin-bottom: 0.5rem;
 
-      span {
-        margin-right: 0.5rem;
-      }
-		}
-
-		.modal-movie-detail-subheading {
-      margin-bottom: 0.5rem;
 			span {
 				margin-right: 0.5rem;
 			}
 		}
 
-    .modal-movie-detail-people {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 1.5rem;
-      font-size: 0.9rem;
-      font-style: italic;
-      font-weight: 300;
+		.modal-movie-detail-subheading {
+			margin-bottom: 0.5rem;
+			span {
+				margin-right: 0.5rem;
+			}
+		}
 
-      .modal-movie-detail-director {
-        
-      }
+		.modal-movie-detail-people {
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 1.5rem;
+			font-size: 0.9rem;
+			font-style: italic;
+			font-weight: 300;
 
-      .modal-movie-detail-casts {
+			.modal-movie-detail-director {
+			}
 
-      }
-    }
+			.modal-movie-detail-casts {
+			}
+		}
 
-    .modal-movie-detail-overview {
-      margin-bottom: 2rem;
+		.modal-movie-detail-overview {
+			margin-bottom: 2rem;
 
 			div {
-        font-size: 1.2rem;
-        font-weight: 700;
+				font-size: 1.2rem;
+				font-weight: 700;
 				margin-bottom: 0.5rem;
 			}
 		}
 	}
+}
+
+.modal-movie-detail-trailer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: auto;
+	left: auto;
+  width: 50%;
+  height: 50%;
+
+  &.no-trailer {
+    width: 100%;
+    height: 100%;
+    background-color: #000000e1;
+  }
 }

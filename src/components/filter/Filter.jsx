@@ -6,6 +6,7 @@ const Filter = ({ genres, activeGenre, setActiveGenre }) => {
 	return (
 		<div className="movie-genre">
 			<Button
+				genre="button-genre"
 				key={0}
 				genreId={0}
 				children="All"
@@ -15,6 +16,7 @@ const Filter = ({ genres, activeGenre, setActiveGenre }) => {
 			{genres.map((genre) => {
 				return (
 					<Button
+						genre="button-genre"
 						key={genre.id}
 						genreId={genre.id}
 						children={genre.name}
