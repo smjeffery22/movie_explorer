@@ -1,16 +1,51 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.scss';
 
 const Navbar = () => {
+	// const [pathname, setPathname] = useState('/');
+	const location = useLocation();
+	console.log(location.pathname)
+
 	return (
 		<div className="navbar">
 			<div className="navbar-container">
 				<div className="navbar-left">
-					<Link to="/">MovieExplorer</Link>
-					<Link to="/popular">Popular</Link>
-					<Link to="/now-playing">Now Playing</Link>
-					<Link to="/upcoming">Upcoming</Link>
-					<Link to="/top-rated">Top Rated</Link>
+					<Link to="/" className="navbar-item">
+						MovieExplorer
+					</Link>
+					<Link
+						to="/popular"
+						className={
+							location.pathname === '/popular' ? 'navbar-item active' : 'navbar-item'
+						}
+					>
+						Popular
+					</Link>
+					<Link
+						to="/now-playing"
+						className={
+							location.pathname === '/now-playing' ? 'navbar-item active' : 'navbar-item'
+						}
+					>
+						Now Playing
+					</Link>
+					<Link
+						to="/upcoming"
+						className={
+							location.pathname === '/upcoming' ? 'navbar-item active' : 'navbar-item'
+						}
+					>
+						Upcoming
+					</Link>
+					<Link
+						to="/top-rated"
+						className={
+							location.pathname === '/top-rated' ? 'navbar-item active' : 'navbar-item'
+						}
+					>
+						Top Rated
+					</Link>
 				</div>
 				<div className="navbar-right">Search</div>
 			</div>

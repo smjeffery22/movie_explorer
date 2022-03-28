@@ -13,7 +13,19 @@
     width: 80%;
     height: 70px;
     margin: 0 auto;
-    // padding: 1rem;
-    // background-color: lightcoral;
+
+    .navbar-item {
+      margin-right: 1rem;
+
+      &:hover {
+        color: #656565;
+      }
+
+      &.active {
+        color: #fff;
+        font-weight: 700;
+        border-bottom: 1.5px solid #fff;
+      }
+    }
   }
 }

@@ -13,3 +13,16 @@ body {
   color: $text-color;
   background-color: $background-color;
 }
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+ol,
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

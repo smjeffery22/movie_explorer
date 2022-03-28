@@ -12,7 +12,7 @@ function App() {
 				<Navbar />
 				<Routes>
 					<Route path="/popular" element={<PopularList />} />
-					<Route path="/now-playimg" element={<PopularList />} />
+					<Route path="/now-playing" element={<PopularList />} />
 					<Route path="/upcoming" element={<PopularList />} />
 					<Route path="/top-rated" element={<PopularList />} />
 				</Routes>
