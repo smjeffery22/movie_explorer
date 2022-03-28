@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import YouTube from 'react-youtube';
 import { motion, AnimatePresence } from 'framer-motion';
 import Backdrop from '../backdrop/Backdrop';
 import './MovieModal.scss';
@@ -36,12 +37,12 @@ const MovieModal = ({ movie, handleClose }) => {
 		fetchCredits();
 	}, []);
 
-	// fetch movie details from api
+	// fetch movie details from api (includes videos)
 	const fetchDetails = async () => {
 		const baseUrl = 'https://api.themoviedb.org/3';
 		const path = `/movie/${movie.id}`;
 		const details = await axios.get(
-			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=videos`
 		);
 
 		setDetails(details.data); // move details data in object
@@ -70,7 +71,7 @@ const MovieModal = ({ movie, handleClose }) => {
 
 	// get name of the movie director
 	const getDirector = () => {
-	  let directorName = '';
+		let directorName = '';
 
 		crews.forEach((crew) => {
 			if (crew.job === 'Director') {
@@ -78,19 +79,28 @@ const MovieModal = ({ movie, handleClose }) => {
 			}
 		});
 
-	  return directorName;
+		return directorName;
 	};
 
-  //get first 5 cast members of the movie
-  const getCasts = () => {
-    const fiveCasts = [];
+	// get first 5 cast members of the movie
+	const getCasts = () => {
+		const fiveCasts = [];
 
-    for (let i = 0; i < 5; i++) {
-      fiveCasts.push(casts[i]['name']);
-    }
+		for (let i = 0; i < 5; i++) {
+			fiveCasts.push(casts[i]['name']);
+		}
 
-    return fiveCasts.join(', ');
-  }
+		return fiveCasts.join(', ');
+	};
+
+  // get movie trailer
+  const getTrailer = () => {
+    const trailer = details.videos.results.find(video => video.name === 'Official Trailer');
+
+    return (
+      <YouTube containerClassName="modal-movie-detail-trailer" videoId={trailer.key} />
+    );
+  };
 
 	// set background of the modal to movie poster
 	const backgroundStyle = {
@@ -134,15 +144,20 @@ const MovieModal = ({ movie, handleClose }) => {
 					</div>
 					<div className="modal-movie-detail-people">
 						<div className="modal-movie-detail-director">
-            <strong>Director:</strong> {crews.length > 0 && getDirector()}
+							<strong>Director:</strong> {crews.length > 0 && getDirector()}
 						</div>
-						<div className="modal-movie-detail-casts"><strong>Casts:</strong> {casts.length > 0 && getCasts()}</div>
+						<div className="modal-movie-detail-casts">
+							<strong>Casts:</strong> {casts.length > 0 && getCasts()}
+						</div>
 					</div>
 					<div className="modal-movie-detail-overview">
 						<div>Overview</div>
 						<p>{movie.overview}</p>
 					</div>
 				</div>
+        <div>
+        {details.videos && getTrailer()}
+        </div>
 			</motion.div>
 		</Backdrop>
 	);
