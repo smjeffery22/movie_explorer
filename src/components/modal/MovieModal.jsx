@@ -28,30 +28,58 @@ import { type } from '@testing-library/user-event/dist/type';
 
 const MovieModal = ({ movie, handleClose }) => {
 	const [details, setDetails] = useState({});
+	const [casts, setCasts] = useState([]);
+	const [crews, setCrews] = useState([]);
 
 	useEffect(() => {
-		// fetch movie details from api
-		const fetchDetails = async () => {
-			const baseUrl = 'https://api.themoviedb.org/3';
-			const path = `/movie/${movie.id}`;
-			const details = await axios.get(
-				`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
-			);
-
-			setDetails(details.data); // move details data in object
-		};
-
 		fetchDetails();
+		fetchCredits();
 	}, []);
 
-  // convert total runtime from minute to hour and minute
-  const convertRuntime = () => {
-    const totalRuntime = details.runtime;
-    const hour = Math.floor(totalRuntime / 60);
-    const mins = totalRuntime - (hour * 60);
+	// fetch movie details from api
+	const fetchDetails = async () => {
+		const baseUrl = 'https://api.themoviedb.org/3';
+		const path = `/movie/${movie.id}`;
+		const details = await axios.get(
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+		);
 
-    return `${hour} h ${mins} m`
-  }
+		setDetails(details.data); // move details data in object
+	};
+
+	// fetch movie credits from api
+	const fetchCredits = async () => {
+		const baseUrl = 'https://api.themoviedb.org/3';
+		const path = `/movie/${movie.id}/credits`;
+		const credits = await axios.get(
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US`
+		);
+
+		setCasts(credits.data.cast);
+		setCrews(credits.data.crew);
+	};
+
+	// convert total runtime from minute to hour and minute
+	const convertRuntime = () => {
+		const totalRuntime = details.runtime;
+		const hour = Math.floor(totalRuntime / 60);
+		const mins = totalRuntime - hour * 60;
+
+		return `${hour} h ${mins} m`;
+	};
+
+	// get name of the movie director
+	const getDirector = () => {
+	  let directorName = '';
+
+		crews.forEach((crew) => {
+			if (crew.job === 'Director') {
+				directorName = crew.name;
+			}
+		});
+
+	  return directorName;
+	};
 
 	// set background of the modal to movie poster
 	const backgroundStyle = {
@@ -80,14 +108,24 @@ const MovieModal = ({ movie, handleClose }) => {
 					</h1>
 					<div className="modal-movie-detail-subheading">
 						<span>{movie.release_date}</span>
-						<span><strong>&#183;</strong></span>
+						<span>
+							<strong>&#183;</strong>
+						</span>
 						{Object.keys(details).length !== 0 &&
 							details.genres.map((genre) => {
-								return <span>{genre.name}</span>
+								return <span>{genre.name}</span>;
 							})}
-						<span><strong>&#183;</strong></span>
-						{(details.runtime < 60) && <span>{details.runtime}</span>}
-						{(details.runtime > 60) && <span>{convertRuntime()}</span>}
+						<span>
+							<strong>&#183;</strong>
+						</span>
+						{details.runtime < 60 && <span>{details.runtime}</span>}
+						{details.runtime > 60 && <span>{convertRuntime()}</span>}
+					</div>
+					<div className="modal-movie-detail-people">
+						<div className="modal-movie-detail-director">
+							Director: {getDirector()}
+						</div>
+						<div className="modal-movie-detail-casts">Casts:</div>
 					</div>
 					<div className="modal-movie-detail-overview">
 						<h3>Overview</h3>
