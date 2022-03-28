@@ -81,6 +81,17 @@ const MovieModal = ({ movie, handleClose }) => {
 	  return directorName;
 	};
 
+  //get first 5 cast members of the movie
+  const getCasts = () => {
+    const fiveCasts = [];
+
+    for (let i = 0; i < 5; i++) {
+      fiveCasts.push(casts[i]['name']);
+    }
+
+    return fiveCasts.join(', ');
+  }
+
 	// set background of the modal to movie poster
 	const backgroundStyle = {
 		background: `linear-gradient(rgba(20,20,20,0.5), rgba(20,20,20,0.5)), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
@@ -123,12 +134,12 @@ const MovieModal = ({ movie, handleClose }) => {
 					</div>
 					<div className="modal-movie-detail-people">
 						<div className="modal-movie-detail-director">
-							Director: {getDirector()}
+            <strong>Director:</strong> {crews.length > 0 && getDirector()}
 						</div>
-						<div className="modal-movie-detail-casts">Casts:</div>
+						<div className="modal-movie-detail-casts"><strong>Casts:</strong> {casts.length > 0 && getCasts()}</div>
 					</div>
 					<div className="modal-movie-detail-overview">
-						<h3>Overview</h3>
+						<div>Overview</div>
 						<p>{movie.overview}</p>
 					</div>
 				</div>

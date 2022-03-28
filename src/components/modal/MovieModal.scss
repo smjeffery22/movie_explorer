@@ -37,7 +37,8 @@
     .modal-movie-detail-people {
       display: flex;
       flex-direction: column;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
       font-style: italic;
       font-weight: 300;
 
@@ -52,7 +53,10 @@
 
     .modal-movie-detail-overview {
       margin-bottom: 2rem;
-			h3 {
+
+			div {
+        font-size: 1.2rem;
+        font-weight: 700;
 				margin-bottom: 0.5rem;
 			}
 		}
