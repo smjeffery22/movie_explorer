@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 import MovieModal from '../modal/MovieModal';
-import './PopularListItem.scss';
+import './ListItem.scss';
 
-const PopularListItem = ({ movie }) => {
+const ListItem = ({ movie }) => {
 	const [modalOpen, setModalOpen] = useState(false);
 	// const [details, setDetails] = useState({});
 
@@ -62,4 +62,4 @@ const PopularListItem = ({ movie }) => {
 	);
 };
 
-export default PopularListItem;
+export default ListItem;

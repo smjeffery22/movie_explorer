@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import PopularListItem from './PopularListItem';
-import Filter from '../filter/Filter';
+import ListItem from '../ListItem';
+import Filter from '../../filter/Filter';
 import './PopularList.scss';
+
+
 
 const PopularList = () => {
 	const [popular, setPopular] = useState([]);
@@ -35,6 +37,9 @@ const PopularList = () => {
 			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`
 		);
 
+		// const popularMovies = await axios.get(requests.fetchPopular);
+		// console.log(popularMovies)
+
 		setPopular(popularMovies.data.results);
 		setFiltered(popularMovies.data.results);
 	};
@@ -60,7 +65,7 @@ const PopularList = () => {
 			/>
 			<div className="movie-list">
 				{filtered.map((movie) => {
-					return <PopularListItem key={movie.id} movie={movie} />;
+					return <ListItem key={movie.id} movie={movie} />;
 				})}
 			</div>
 		</div>
