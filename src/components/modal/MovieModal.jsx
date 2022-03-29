@@ -8,7 +8,6 @@ import { AiOutlineClose } from 'react-icons/ai';
 import Button from '../button/Button';
 import Backdrop from '../backdrop/Backdrop';
 import './MovieModal.scss';
-import { type } from '@testing-library/user-event/dist/type';
 
 // const dropIn = {
 // 	hidden: {
@@ -100,14 +99,16 @@ const MovieModal = ({ movie, handleClose }) => {
 				fiveCasts.push(casts[i]['name']);
 			}
 		}
-		
+
 		return fiveCasts.join(', ');
 	};
 
 	// get movie trailer
 	const getTrailer = () => {
-		const trailer = details.videos.results.find((video) =>
-			video.name.includes('Official Trailer') || video.name.includes('Trailer')
+		const trailer = details.videos.results.find(
+			(video) =>
+				video.name.includes('Official Trailer') ||
+				video.name.includes('Trailer')
 		);
 
 		if (trailer) {
@@ -120,6 +121,9 @@ const MovieModal = ({ movie, handleClose }) => {
 						opts={{
 							width: '100%',
 							height: '100%',
+							playerVars: {
+								autoplay: 1,
+							},
 						}}
 					/>
 				</div>
@@ -133,7 +137,7 @@ const MovieModal = ({ movie, handleClose }) => {
 			);
 		}
 	};
-	
+
 	// set background of the modal to movie poster
 	const backgroundStyle = {
 		background: `linear-gradient(rgba(20,20,20,0.5), rgba(20,20,20,0.5)), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,

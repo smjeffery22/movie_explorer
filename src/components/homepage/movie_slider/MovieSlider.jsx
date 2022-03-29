@@ -1,5 +1,7 @@
-import React from 'react';
+import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { AnimatePresence } from 'framer-motion';
+import MovieModal from '../../modal/MovieModal';
 import './MovieSlider.scss';
 
 // Import Swiper styles
@@ -11,6 +13,10 @@ import 'swiper/css/navigation';
 import { Pagination, Navigation } from 'swiper';
 
 const MovieSlider = ({ title, movies }) => {
+	const [modalOpen, setModalOpen] = useState(false);
+
+	const close = () => setModalOpen(false);
+
 	return (
 		<div className="slider">
 			<div className="slider-title">{title}</div>
@@ -35,7 +41,7 @@ const MovieSlider = ({ title, movies }) => {
 				>
 					{movies.map((movie) => {
 						return (
-							<SwiperSlide key={movie.id}>
+							<SwiperSlide key={movie.id} onClick={() => setModalOpen(true)}>
 								<img
 									className="slider-poster"
 									src={
@@ -45,6 +51,19 @@ const MovieSlider = ({ title, movies }) => {
 									}
 									alt=""
 								/>
+								<AnimatePresence
+									initial={false}
+									exitBeforeEnter={true}
+									onExitComplete={() => null}
+								>
+									{modalOpen && (
+										<MovieModal
+											movie={movie}
+											modalOpen={modalOpen}
+											handleClose={close}
+										/>
+									)}
+								</AnimatePresence>
 							</SwiperSlide>
 						);
 					})}
