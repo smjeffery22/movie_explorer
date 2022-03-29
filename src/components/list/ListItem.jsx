@@ -8,8 +8,8 @@ const ListItem = ({ movie, upcoming }) => {
 	// const [details, setDetails] = useState({});
 
 	// useEffect(() => {
-  //   fetchDetails();
-  // }, [modalOpen]);
+	//   fetchDetails();
+	// }, [modalOpen]);
 
 	// // fetch movie details from api
 	// const fetchDetails = async () => {
@@ -24,6 +24,13 @@ const ListItem = ({ movie, upcoming }) => {
 
 	const open = () => setModalOpen(true);
 	const close = () => setModalOpen(false);
+	console.log(movie.vote_average)
+	const movieRatingColor = (rating) => {
+		if (rating < 5) return 'movie-rating-low';
+		if (5 <= rating && rating < 7) return 'movie-rating-average';
+		if (7 <= rating && rating < 8.5) return 'movie-rating-good';
+		if (8.5 <= rating) return 'movie-rating-high';
+	};
 
 	return (
 		<AnimatePresence>
@@ -40,12 +47,20 @@ const ListItem = ({ movie, upcoming }) => {
 				<div className="movie-item-card">
 					<img
 						className="movie-poster"
-						src={movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : require('../../assets/no_image.png')}
+						src={
+							movie.poster_path
+								? `https://image.tmdb.org/t/p/w342${movie.poster_path}`
+								: require('../../assets/no_image.png')
+						}
 						alt=""
 					/>
 					<div className="movie-info">
 						<div className="movie-title">{movie.title}</div>
-						{!upcoming && <div className="movie-rating">{movie.vote_average}</div>}
+						{!upcoming && (
+							<div className={movieRatingColor(movie.vote_average)}>
+								{movie.vote_average.toFixed(1)}
+							</div>
+						)}
 					</div>
 				</div>
 			</motion.div>
@@ -55,7 +70,9 @@ const ListItem = ({ movie, upcoming }) => {
 				exitBeforeEnter={true}
 				onExitComplete={() => null}
 			>
-				{modalOpen && <MovieModal movie={movie} modalOpen={modalOpen} handleClose={close} />}
+				{modalOpen && (
+					<MovieModal movie={movie} modalOpen={modalOpen} handleClose={close} />
+				)}
 			</AnimatePresence>
 		</AnimatePresence>
 	);

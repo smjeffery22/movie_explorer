@@ -28,6 +28,19 @@
         font-weight: 900;
         padding-right: 1rem;
       }
+
+      .movie-rating-high {
+        color: green;
+        font-weight: 700;
+      }
+
+      .movie-rating-good {
+        color: greenyellow;
+      }
+
+      .movie-rating-average {
+        color: orange;
+      }
     }
 	}
 }
