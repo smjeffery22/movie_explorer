@@ -1,8 +1,12 @@
-import React from 'react';
+import { useState } from 'react';
+import Button from '../../button/Button';
+import { FaPlay, FaInfoCircle } from 'react-icons/fa';
 import YouTube from 'react-youtube';
 import './Hero.scss';
 
 const Hero = ({ heroMovie }) => {
+	const [playTrailer, setPlayTrailer] = useState(false);
+
 	// set background of the hero container
 	const backgroundStyle = {
 		background: `linear-gradient(rgba(20,20,20,0.2), rgba(20,20,20,0.2)), url(https://image.tmdb.org/t/p/original${heroMovie.backdrop_path})`,
@@ -25,8 +29,16 @@ const Hero = ({ heroMovie }) => {
 					{heroMovie.overview && shortenOverview(heroMovie.overview)}
 				</div>
 				<div className="hero-buttons">
-					<button>Watch Trailer</button>
-					<button>More Info</button>
+					<Button
+						heroButtonTrailer="button-hero-trailer"
+						onClick={() => setPlayTrailer(true)}
+					>
+						<FaPlay className="play-button" />
+						Watch Trailer
+					</Button>
+					<Button heroButtonInfo="button-hero-info">
+						<FaInfoCircle className="info" /> More Info
+					</Button>
 				</div>
 			</div>
 			{/* <iframe

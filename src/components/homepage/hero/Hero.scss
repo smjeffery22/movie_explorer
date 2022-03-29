@@ -11,7 +11,6 @@
 	.hero-info {
 		display: flex;
 		flex-direction: column;
-		border: 1px solid magenta;
 		color: #fff;
 		position: absolute;
 		width: 40%;
@@ -26,7 +25,11 @@
 
 		.hero-overview {
       font-size: 1.25vw;
-			margin-bottom: 0.75rem;
+			margin-bottom: 1rem;
 		}
+
+    .hero-buttons {
+      display: flex;
+    }
 	}
 }

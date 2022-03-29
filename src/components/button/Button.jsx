@@ -9,12 +9,14 @@ const Button = ({
 	onClick,
 	trailer,
 	close,
+	heroButtonTrailer,
+	heroButtonInfo,
 }) => {
 	return (
 		<div
 			className={`${genre} ${
 				activeGenre === genreId && 'active'
-			} ${trailer} ${close}`}
+			} ${trailer} ${close} ${heroButtonTrailer} ${heroButtonInfo}`}
 			onClick={onClick}
 		>
 			{children}

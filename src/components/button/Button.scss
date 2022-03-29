@@ -62,3 +62,48 @@
 		background-color: #454545;
 	}
 }
+
+.button-hero-trailer {
+	display: flex;
+	align-items: center;
+	padding: 0.5em 1em;
+	color: #000;
+	border-radius: 0.3rem;
+	border: 2px solid #fff;
+	font-weight: bold;
+	font-size: 1.15vw;
+	background-color: #fff;
+	margin-right: 0.5em;
+	cursor: pointer;
+
+	.play-button {
+		margin-right: 0.5rem;
+	}
+
+	&:hover {
+		background-color: #c0c0c0;
+		border: 2px solid #c0c0c0;
+	}
+}
+
+.button-hero-info {
+	display: flex;
+	align-items: center;
+	padding: 0.5em 1em;
+	color: #fff;
+	border-radius: 0.3rem;
+	border: 2px solid #454545;
+	font-weight: bold;
+	font-size: 1.15vw;
+	background-color: #454545;
+	cursor: pointer;
+
+	.info {
+		margin-right: 0.5rem;
+	}
+
+	&:hover {
+		background-color: #282828;
+		border: 2px solid #282828;
+	}
+}
