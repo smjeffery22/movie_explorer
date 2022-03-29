@@ -16,13 +16,22 @@ const MovieSlider = ({ title, movies }) => {
 			<div className="slider-title">{title}</div>
 			<div className="slider-container">
 				<Swiper
-					slidesPerView={10}
+					slidesPerView={5}
 					spaceBetween={20}
-					slidesPerGroup={10}
+					slidesPerGroup={5}
 					loop={false}
 					loopFillGroupWithBlank={true}
 					navigation={true}
 					modules={[Navigation]}
+					speed={1500}
+					breakpoints={{
+						// when window width is >= 1200px
+						1200: {
+							slidesPerView: 10,
+							spaceBetween: 20,
+							slidesPerGroup: 10,
+						},
+					}}
 				>
 					{movies.map((movie) => {
 						return (

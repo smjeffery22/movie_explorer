@@ -100,7 +100,7 @@ const MovieModal = ({ movie, handleClose }) => {
 				fiveCasts.push(casts[i]['name']);
 			}
 		}
-		console.log(fiveCasts);
+		
 		return fiveCasts.join(', ');
 	};
 

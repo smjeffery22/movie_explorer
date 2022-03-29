@@ -30,25 +30,20 @@
 			padding: 20px 0;
 
 			.swiper-slide {
-
 				&:hover {
 					transition: all 0.2s ease-in-out;
 					transform: scale(1.1);
 				}
 
-				&:first-child:hover {
+				&:first-child:hover,
+				&:nth-child(11):hover {
 					margin: 0 10px;
 				}
 
-        &:nth-child(6):hover,
-        &:nth-child(11):hover,
-        &:nth-child(16):hover {
-          margin: 0 -10px;
-        }
-
-        &:last-child:hover {
-          margin: 0 -10px;
-        }
+				&:nth-child(10):hover,
+				&:last-child:hover {
+					margin: 0 -10px;
+				}
 
 				.slider-poster {
 					display: block;
@@ -56,7 +51,6 @@
 					border-radius: 1.2rem;
 				}
 			}
-
 		}
 	}
 }
