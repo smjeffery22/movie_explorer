@@ -1,10 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import axios from 'axios';
 import MovieModal from '../modal/MovieModal';
 import './ListItem.scss';
 
-const ListItem = ({ movie }) => {
+const ListItem = ({ movie, upcoming }) => {
 	const [modalOpen, setModalOpen] = useState(false);
 	// const [details, setDetails] = useState({});
 
@@ -41,12 +40,12 @@ const ListItem = ({ movie }) => {
 				<div className="movie-item-card">
 					<img
 						className="movie-poster"
-						src={`https://image.tmdb.org/t/p/w342${movie.poster_path}`}
+						src={movie.poster_path ? `https://image.tmdb.org/t/p/w342${movie.poster_path}` : require('../../assets/no_image.png')}
 						alt=""
 					/>
 					<div className="movie-info">
 						<div className="movie-title">{movie.title}</div>
-						<div className="movie-rating">{movie.vote_average}</div>
+						{!upcoming && <div className="movie-rating">{movie.vote_average}</div>}
 					</div>
 				</div>
 			</motion.div>

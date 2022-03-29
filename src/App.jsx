@@ -4,6 +4,7 @@ import axios from 'axios';
 import Navbar from './components/navbar/Navbar';
 import PopularList from './components/list/popular/PopularList';
 import NowPlaying from './components/list/now_playing/NowPlaying';
+import Upcoming from './components/list/upcoming/Upcoming';
 import './App.scss';
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
 				<Routes>
 					<Route path="/popular" element={<PopularList />} />
 					<Route path="/now-playing" element={<NowPlaying />} />
-					<Route path="/upcoming" element={<PopularList />} />
+					<Route path="/upcoming" element={<Upcoming />} />
 					<Route path="/top-rated" element={<PopularList />} />
 				</Routes>
 			</div>
