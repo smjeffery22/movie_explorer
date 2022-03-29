@@ -159,7 +159,7 @@ const MovieModal = ({ movie, handleClose }) => {
 								trailer="button-trailer"
 								onClick={() => setPlayTrailer(true)}
 							>
-								<FaPlay className="play-button" /> Play Trailer
+								<FaPlay className="play-button" /> Watch Trailer
 							</Button>
 						</div>
 					</h1>
