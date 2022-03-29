@@ -1,3 +1,5 @@
+@import '../../../styles/variables';
+
 .slider {
 	// background-color: lightblue;
 	// border: 1px solid magenta;
@@ -6,30 +8,54 @@
 
 	.slider-title {
 		font-size: 1.2rem;
-		margin-bottom: 1rem;
+		font-style: italic;
+		font-weight: 700;
 	}
 
 	.slider-container {
 		display: flex;
 		overflow: hidden;
 
-		.swiper {
-			width: 100%;
-			height: 100%;
+		.swiper-button-prev,
+		.swiper-button-next {
+			color: $text-color;
+
+			&:hover {
+				transition: all 0.2s ease-in-out;
+				transform: scale(1.2);
+			}
 		}
 
-		.swiper-slide {
+		.swiper-wrapper {
+			padding: 20px 0;
 
-      .slider-poster {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
+			.swiper-slide {
+				&:hover {
+					transition: all 0.2s ease-in-out;
+					transform: scale(1.1);
+				}
+
+				&:first-child:hover {
+					margin: 0 10px;
+				}
+
+        &:nth-child(6):hover,
+        &:nth-child(11):hover,
+        &:nth-child(16):hover {
+          margin: 0 -10px;
+        }
+
+        &:last-child:hover {
+          margin: 0 -10px;
+        }
+
+				.slider-poster {
+					display: block;
+					width: 100%;
+					border-radius: 1.2rem;
+				}
+			}
+
 		}
-
-		// .slider-poster {
-		// 	width: 20%;
-		// 	margin-right: 0.5rem;
-		// }
 	}
 }

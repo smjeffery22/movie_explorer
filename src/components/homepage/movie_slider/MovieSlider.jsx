@@ -16,22 +16,18 @@ const MovieSlider = ({ title, movies }) => {
 			<div className="slider-title">{title}</div>
 			<div className="slider-container">
 				<Swiper
-					slidesPerView={5}
+					slidesPerView={6}
 					spaceBetween={30}
 					slidesPerGroup={5}
 					loop={false}
 					loopFillGroupWithBlank={true}
-					pagination={{
-						clickable: true,
-					}}
 					navigation={true}
-					modules={[Pagination, Navigation]}
+					modules={[Navigation]}
 				>
 					{movies.map((movie) => {
 						return (
-							<SwiperSlide>
+							<SwiperSlide key={movie.id}>
 								<img
-									key={movie.id}
 									className="slider-poster"
 									src={
 										movie.poster_path
