@@ -144,7 +144,7 @@ const MovieModal = ({ movie, handleClose }) => {
 		<Backdrop onClick={handleClose}>
 			<motion.div
 				className="modal"
-				style={backgroundStyle}
+				style={movie.backdrop_path && backgroundStyle}
 				onClick={(e) => e.stopPropagation()}
 				// variants={dropIn}
 				// initial="hidden"
