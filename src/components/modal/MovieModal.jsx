@@ -107,7 +107,7 @@ const MovieModal = ({ movie, handleClose }) => {
 	// get movie trailer
 	const getTrailer = () => {
 		const trailer = details.videos.results.find((video) =>
-			video.name.includes('Official Trailer')
+			video.name.includes('Official Trailer') || video.name.includes('Trailer')
 		);
 
 		if (trailer) {

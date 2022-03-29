@@ -1,16 +1,19 @@
 import { useState } from 'react';
 import Button from '../../button/Button';
 import { FaPlay, FaInfoCircle } from 'react-icons/fa';
+import { AnimatePresence } from 'framer-motion';
 import YouTube from 'react-youtube';
+import MovieModal from '../../modal/MovieModal';
 import './Hero.scss';
 
 const Hero = ({ heroMovie }) => {
 	const [playTrailer, setPlayTrailer] = useState(false);
+	const [showInfo, setShowInfo] = useState(false);
 
 	// set background of the hero container
 	const backgroundStyle = {
 		background: `linear-gradient(rgba(20,20,20,0.2), rgba(20,20,20,0.2)), url(https://image.tmdb.org/t/p/original${heroMovie.backdrop_path})`,
-		backgroundSize: 'cover',
+		backgroundSize: '100% 100%',
 		backgroundRepeat: 'no-repeat',
 	};
 
@@ -20,6 +23,8 @@ const Hero = ({ heroMovie }) => {
 			? `${overview.split(' ').slice(0, 30).join(' ')} ...`
 			: overview;
 	};
+
+	const close = () => setShowInfo(false);
 
 	return (
 		<div className="hero" style={heroMovie.backdrop_path && backgroundStyle}>
@@ -36,11 +41,23 @@ const Hero = ({ heroMovie }) => {
 						<FaPlay className="play-button" />
 						Watch Trailer
 					</Button>
-					<Button heroButtonInfo="button-hero-info">
+					<Button
+						heroButtonInfo="button-hero-info"
+						onClick={() => setShowInfo(true)}
+					>
 						<FaInfoCircle className="info" /> More Info
 					</Button>
 				</div>
 			</div>
+			<AnimatePresence
+				initial={false}
+				exitBeforeEnter={true}
+				onExitComplete={() => null}
+			>
+				{showInfo && (
+					<MovieModal movie={heroMovie} modalOpen={showInfo} handleClose={close} />
+				)}
+			</AnimatePresence>
 			{/* <iframe
 				src="https://www.youtube.com/embed/3U7KaI_NPGg?&autoplay=1&mute=1"
 				frameborder="0"
