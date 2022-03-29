@@ -24,7 +24,6 @@ const ListItem = ({ movie, upcoming }) => {
 
 	const open = () => setModalOpen(true);
 	const close = () => setModalOpen(false);
-	console.log(movie.vote_average)
 	const movieRatingColor = (rating) => {
 		if (rating < 5) return 'movie-rating-low';
 		if (5 <= rating && rating < 7) return 'movie-rating-average';

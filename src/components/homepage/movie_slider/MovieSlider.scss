@@ -1,0 +1,21 @@
+.slider {
+	// background-color: lightblue;
+	// border: 1px solid magenta;
+	// width: 90%;
+	margin: 1.5rem 4%;
+
+	.slider-title {
+		font-size: 1.2rem;
+		margin-bottom: 1rem;
+	}
+
+	.slider-container {
+		display: flex;
+		overflow: hidden;
+
+			.slider-poster {
+				width: 20%;
+		    margin-right: 0.5rem;
+			}
+	}
+}
