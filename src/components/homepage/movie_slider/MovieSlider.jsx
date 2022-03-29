@@ -16,9 +16,9 @@ const MovieSlider = ({ title, movies }) => {
 			<div className="slider-title">{title}</div>
 			<div className="slider-container">
 				<Swiper
-					slidesPerView={6}
-					spaceBetween={30}
-					slidesPerGroup={5}
+					slidesPerView={10}
+					spaceBetween={20}
+					slidesPerGroup={10}
 					loop={false}
 					loopFillGroupWithBlank={true}
 					navigation={true}
@@ -31,7 +31,7 @@ const MovieSlider = ({ title, movies }) => {
 									className="slider-poster"
 									src={
 										movie.poster_path
-											? `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+											? `https://image.tmdb.org/t/p/w154${movie.poster_path}`
 											: require('../../../assets/no_image.png')
 									}
 									alt=""
