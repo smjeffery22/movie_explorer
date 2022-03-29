@@ -3,7 +3,7 @@ import axios from 'axios';
 import YouTube from 'react-youtube';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay } from 'react-icons/fa';
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose } from 'react-icons/ai';
 
 import Button from '../button/Button';
 import Backdrop from '../backdrop/Backdrop';
@@ -91,17 +91,23 @@ const MovieModal = ({ movie, handleClose }) => {
 	const getCasts = () => {
 		const fiveCasts = [];
 
-		for (let i = 0; i < 5; i++) {
-			fiveCasts.push(casts[i]['name']);
+		if (casts.length >= 5) {
+			for (let i = 0; i < 5; i++) {
+				fiveCasts.push(casts[i]['name']);
+			}
+		} else {
+			for (let i = 0; i < casts.length; i++) {
+				fiveCasts.push(casts[i]['name']);
+			}
 		}
-
+		console.log(fiveCasts);
 		return fiveCasts.join(', ');
 	};
 
 	// get movie trailer
 	const getTrailer = () => {
-		const trailer = details.videos.results.find(
-			(video) => video.name.includes('Official Trailer')
+		const trailer = details.videos.results.find((video) =>
+			video.name.includes('Official Trailer')
 		);
 
 		if (trailer) {
@@ -127,7 +133,7 @@ const MovieModal = ({ movie, handleClose }) => {
 			);
 		}
 	};
-
+	
 	// set background of the modal to movie poster
 	const backgroundStyle = {
 		background: `linear-gradient(rgba(20,20,20,0.5), rgba(20,20,20,0.5)), url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
@@ -170,7 +176,7 @@ const MovieModal = ({ movie, handleClose }) => {
 						</span>
 						{Object.keys(details).length !== 0 &&
 							details.genres.map((genre) => {
-								return <span>{genre.name}</span>;
+								return <span key={genre.id}>{genre.name}</span>;
 							})}
 						<span>
 							<strong>&#183;</strong>

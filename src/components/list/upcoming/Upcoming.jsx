@@ -32,10 +32,10 @@ const NowPlaying = () => {
 		const baseUrl = 'https://api.themoviedb.org/3';
 		const path = '/movie/upcoming';
 		const upcomingMovies1 = await axios.get(
-			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&region=CA`
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1&region=US`
 		);
 		const upcomingMovies2 = await axios.get(
-			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=2&region=CA`
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=2&region=US`
 		);
 
 		// combine movie data returned from axios calls
