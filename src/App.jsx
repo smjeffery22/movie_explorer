@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import axios from 'axios';
+import HomePage from './components/homepage/HomePage';
 import Navbar from './components/navbar/Navbar';
 import PopularList from './components/list/popular/PopularList';
 import NowPlaying from './components/list/now_playing/NowPlaying';
@@ -14,6 +15,7 @@ function App() {
 			<div className="movie-wrap">
 				<Navbar />
 				<Routes>
+					<Route path="/" element={<HomePage />} />
 					<Route path="/popular" element={<PopularList />} />
 					<Route path="/now-playing" element={<NowPlaying />} />
 					<Route path="/upcoming" element={<Upcoming />} />
