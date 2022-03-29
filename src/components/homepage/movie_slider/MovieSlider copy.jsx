@@ -1,32 +1,14 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './MovieSlider.scss';
-
-// Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-
-// import required modules
-import { Pagination, Navigation } from 'swiper';
 
 const MovieSlider = ({ title, movies }) => {
 	return (
 		<div className="slider">
 			<div className="slider-title">{title}</div>
 			<div className="slider-container">
-				<Swiper
-					slidesPerView={5}
-					spaceBetween={30}
-					slidesPerGroup={5}
-					loop={false}
-					loopFillGroupWithBlank={true}
-					pagination={{
-						clickable: true,
-					}}
-					navigation={true}
-					modules={[Pagination, Navigation]}
-				>
+				<Swiper spaceBetween={10} slidesPerView={6}>
 					{movies.map((movie) => {
 						return (
 							<SwiperSlide>

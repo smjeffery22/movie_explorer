@@ -13,9 +13,23 @@
 		display: flex;
 		overflow: hidden;
 
-			.slider-poster {
-				width: 20%;
-		    margin-right: 0.5rem;
-			}
+		.swiper {
+			width: 100%;
+			height: 100%;
+		}
+
+		.swiper-slide {
+
+      .slider-poster {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+		}
+
+		// .slider-poster {
+		// 	width: 20%;
+		// 	margin-right: 0.5rem;
+		// }
 	}
 }
