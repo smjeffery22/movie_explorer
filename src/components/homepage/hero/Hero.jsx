@@ -1,10 +1,44 @@
 import React from 'react';
+import YouTube from 'react-youtube';
 import './Hero.scss';
 
-const Hero = () => {
+const Hero = ({ heroMovie }) => {
+	console.log('hero:', heroMovie);
 	return (
-		<div className="hero">
-        <img src="https://occ-0-724-116.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABcw9kVVgBtVwg6_PKTmNo7raqBp7nAo_rmiSZDYeMDRm02xDLWs23eQgFcIJgYiN7d1hnuJpYsAQgzBnjJQtcFOdIKrf.webp?r=9ca" alt="" />
+		<div
+			className="hero"
+			style={{
+				backgroundImage: `url(https://image.tmdb.org/t/p/original${heroMovie.backdrop_path})`,
+			}}
+		>
+			{/* <iframe
+				src="https://www.youtube.com/embed/3U7KaI_NPGg?&autoplay=1&mute=1"
+				frameborder="0"
+				allow="autoplay; encrypted-media"
+				allowfullscreen
+				title="video"
+				width="100%"
+				height="100%"
+			/> */}
+			{/* <YouTube
+				containerClassName="trailer-youtube"
+				videoId="3U7KaI_NPGg"
+				opts={{
+					width: '100%',
+					height: '100%',
+					playerVars: {
+						// https://developers.google.com/youtube/player_parameters
+						autoplay: 1,
+						muted: 1,
+					},
+				}}
+			/> */}
+			{/* {heroMovie.poster_path && (
+				<img
+					src={`https://image.tmdb.org/t/p/original${heroMovie.poster_path}`}
+					alt=""
+				/>
+			)} */}
 		</div>
 	);
 };

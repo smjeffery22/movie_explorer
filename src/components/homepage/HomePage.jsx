@@ -5,13 +5,27 @@ import MovieSlider from './movie_slider/MovieSlider';
 import './HomePage.scss';
 
 const HomePage = () => {
+	const [heroMovie, setHeroMovie] = useState({});
 	const [trendingDay, setTrendingDay] = useState([]);
 	const [trendingWeek, setTrendingWeek] = useState([]);
 
 	useEffect(() => {
 		fetchTrending('day');
 		fetchTrending('week');
+		fetchRandomTopRated();
 	}, []);
+
+	// fetch one random top rated movie from api
+	const fetchRandomTopRated = async () => {
+		const randomNumber19 = Math.floor(Math.random() * 19);
+		const randomNumber100 = Math.floor(Math.random() * 100) + 1;
+		const baseUrl = 'https://api.themoviedb.org/3';
+		const path = '/movie/top_rated';
+		const randomTopRatedMovie = await axios.get(
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${randomNumber100}`
+		);
+		setHeroMovie(randomTopRatedMovie.data.results[randomNumber19]);
+	};
 
 	// fetch daily/weekly trending movies from api
 	const fetchTrending = async (timeWindow) => {
@@ -27,7 +41,7 @@ const HomePage = () => {
 
 	return (
 		<div className="home">
-			<Hero />
+			<Hero heroMovie={heroMovie} />
 			<MovieSlider title="Trending Today" movies={trendingDay} />
 			<MovieSlider title="Trending This Week" movies={trendingWeek} />
 		</div>
