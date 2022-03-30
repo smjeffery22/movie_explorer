@@ -8,8 +8,8 @@ const Navbar = ({ searchValue, handleSearchValue }) => {
 	const searchRef = useRef(null);
 
 	const clearSearchValue = () => {
-		handleSearchValue('')
-		console.log(document.body)
+		handleSearchValue('');
+		searchRef.current.value = '';
 	};
 
 	return (
@@ -66,7 +66,7 @@ const Navbar = ({ searchValue, handleSearchValue }) => {
 				</div>
 				<div className="navbar-right">
 					<input
-					ref={searchRef}
+						ref={searchRef}
 						className="navbar-search"
 						type="text"
 						placeholder="Search movie..."
