@@ -3,7 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.scss';
 
-const Navbar = () => {
+const Navbar = ({ searchValue, handleSearchValue }) => {
 	const location = useLocation();
 
 	return (
@@ -59,6 +59,8 @@ const Navbar = () => {
 						className="navbar-search"
 						type="text"
 						placeholder="Search movie..."
+						value={searchValue}
+						onChange={(e) => handleSearchValue(e.target.value)}
 					/>
 					<span>
 						<FaSearch className="navbar-search-icon" />

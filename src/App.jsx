@@ -7,13 +7,21 @@ import PopularList from './components/list/popular/PopularList';
 import NowPlaying from './components/list/now_playing/NowPlaying';
 import Upcoming from './components/list/upcoming/Upcoming';
 import TopRated from './components/list/top_rated/TopRated';
+import SearchList from './components/list/search/SearchList'
 import './App.scss';
 
 function App() {
+	const [searchValue, setSearchValue] = useState('');
+
+	const handleSearchValue = (search) => setSearchValue(search);
+
 	return (
 		<Router>
 			<div className="movie-wrap">
-				<Navbar />
+				<Navbar
+					searchValue={searchValue}
+					handleSearchValue={handleSearchValue}
+				/>
 				<Routes>
 					<Route path="/" element={<HomePage />} />
 					<Route path="/popular" element={<PopularList />} />

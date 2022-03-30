@@ -15,7 +15,6 @@ const Hero = ({ heroMovie }) => {
 	useEffect(() => {
 		fetchDetails();
 	}, [heroMovie]);
-	console.log(playTrailer, details);
 
 	const close = () => setModalOpen(false);
 

@@ -1,0 +1,16 @@
+.movie-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // align-items: center;
+  width: 92%;
+  margin: 70px auto;
+
+  
+  .movie-list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 auto;
+  }
+}
