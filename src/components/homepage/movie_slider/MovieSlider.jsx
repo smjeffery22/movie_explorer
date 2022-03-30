@@ -14,9 +14,12 @@ import { Pagination, Navigation } from 'swiper';
 
 const MovieSlider = ({ title, movies }) => {
 	const [modalOpen, setModalOpen] = useState(false);
+	// sets the clicked movie as selected for opening movie modal
 	const [selectedMovie, setSelectedMovie] = useState({});
 
 	const close = () => setModalOpen(false);
+
+	// set states when a movie is clicked from the slider
 	const clickedMovie = (movie) => {
 		setModalOpen(true);
 		setSelectedMovie(movie);

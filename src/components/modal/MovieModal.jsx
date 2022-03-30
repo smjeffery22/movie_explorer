@@ -102,7 +102,6 @@ const MovieModal = ({ movie, handleClose }) => {
 		if (trailer) {
 			return (
 				<div className="modal-movie-detail-trailer">
-					{/* <Button close="button-close">X</Button> */}
 					<YouTube
 						containerClassName="trailer-youtube"
 						videoId={trailer.key}
@@ -114,6 +113,12 @@ const MovieModal = ({ movie, handleClose }) => {
 							},
 						}}
 					/>
+					<Button
+						close="hero-movie-trailer-close button-close"
+						onClick={() => setPlayTrailer(false)}
+					>
+						X
+					</Button>
 				</div>
 			);
 		} else {

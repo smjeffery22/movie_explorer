@@ -13,9 +13,8 @@ const Hero = ({ heroMovie }) => {
 	const [modalOpen, setModalOpen] = useState(false);
 
 	useEffect(() => {
-		// fetchDetails();
+		fetchDetails();
 	}, [heroMovie]);
-
 
 	const close = () => setModalOpen(false);
 
@@ -60,6 +59,12 @@ const Hero = ({ heroMovie }) => {
 							},
 						}}
 					/>
+					<Button
+						close="hero-movie-trailer-close button-close"
+						onClick={() => setPlayTrailer(false)}
+					>
+						X
+					</Button>
 				</div>
 			);
 		} else {
