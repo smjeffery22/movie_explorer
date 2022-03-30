@@ -16,7 +16,7 @@ const Navbar = ({ searchValue, handleSearchValue }) => {
 		<div className="navbar">
 			<div className="navbar-container">
 				<div className="navbar-left">
-					<Link to="/" className="navbar-menu" onClick={clearSearchValue}>
+					<Link to="/" className="navbar-menu app-name" onClick={clearSearchValue}>
 						MovieExplorer
 					</Link>
 					<Link
