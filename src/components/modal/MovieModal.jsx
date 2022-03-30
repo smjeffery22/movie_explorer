@@ -138,10 +138,6 @@ const MovieModal = ({ movie, handleClose }) => {
 				className="modal"
 				style={movie.backdrop_path && backgroundStyle}
 				onClick={(e) => e.stopPropagation()}
-				// variants={dropIn}
-				// initial="hidden"
-				// animate="visible"
-				// exit="exit"
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}

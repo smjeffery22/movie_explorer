@@ -14,8 +14,13 @@ import { Pagination, Navigation } from 'swiper';
 
 const MovieSlider = ({ title, movies }) => {
 	const [modalOpen, setModalOpen] = useState(false);
+	const [selectedMovie, setSelectedMovie] = useState({});
 
 	const close = () => setModalOpen(false);
+	const clickedMovie = (movie) => {
+		setModalOpen(true);
+		setSelectedMovie(movie);
+	};
 
 	return (
 		<div className="slider">
@@ -42,7 +47,7 @@ const MovieSlider = ({ title, movies }) => {
 				>
 					{movies.map((movie) => {
 						return (
-							<SwiperSlide key={movie.id} onClick={() => setModalOpen(true)}>
+							<SwiperSlide key={movie.id} onClick={() => clickedMovie(movie)}>
 								<img
 									className="slider-poster"
 									src={
@@ -56,19 +61,14 @@ const MovieSlider = ({ title, movies }) => {
 									initial={false}
 									exitBeforeEnter={true}
 									onExitComplete={() => null}
-								>
-									{modalOpen && (
-										<MovieModal
-											movie={movie}
-											modalOpen={modalOpen}
-											handleClose={close}
-										/>
-									)}
-								</AnimatePresence>
+								></AnimatePresence>
 							</SwiperSlide>
 						);
 					})}
 				</Swiper>
+				{modalOpen && selectedMovie && (
+					<MovieModal movie={selectedMovie} modalOpen={modalOpen} handleClose={close} />
+				)}
 			</div>
 		</div>
 	);
