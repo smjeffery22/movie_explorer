@@ -13,8 +13,9 @@ const Hero = ({ heroMovie }) => {
 	const [modalOpen, setModalOpen] = useState(false);
 
 	useEffect(() => {
-		fetchDetails();
+		// fetchDetails();
 	}, [heroMovie]);
+
 
 	const close = () => setModalOpen(false);
 

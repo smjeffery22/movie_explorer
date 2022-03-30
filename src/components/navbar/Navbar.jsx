@@ -59,7 +59,6 @@ const Navbar = ({ searchValue, handleSearchValue }) => {
 						className="navbar-search"
 						type="text"
 						placeholder="Search movie..."
-						value={searchValue}
 						onChange={(e) => handleSearchValue(e.target.value)}
 					/>
 					<span>
