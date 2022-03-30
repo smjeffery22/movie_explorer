@@ -17,7 +17,10 @@
 
 		.swiper-button-prev,
 		.swiper-button-next {
+			height: 100%;
 			color: $text-color;
+			background-color: rgba(20, 20, 20, 0.2);
+			top: 10%;
 
 			&:hover {
 				transition: all 0.2s ease-in-out;

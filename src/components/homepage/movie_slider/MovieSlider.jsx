@@ -27,6 +27,7 @@ const MovieSlider = ({ title, movies }) => {
 					slidesPerGroup={5}
 					loop={false}
 					loopFillGroupWithBlank={true}
+					grabCursor={true}
 					navigation={true}
 					modules={[Navigation]}
 					speed={1500}

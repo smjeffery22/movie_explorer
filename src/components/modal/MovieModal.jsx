@@ -16,7 +16,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // import required modules
-import { Pagination, Navigation } from 'swiper';
+import { Pagination, FreeMode } from 'swiper';
 
 const MovieModal = ({ movie, handleClose }) => {
 	const [details, setDetails] = useState({});
@@ -196,14 +196,22 @@ const MovieModal = ({ movie, handleClose }) => {
 								<div className="similar-title">Similar Movies</div>
 								<div className="slider-container">
 									<Swiper
-										slidesPerView={7}
+										slidesPerView={5.5}
 										spaceBetween={20}
-										slidesPerGroup={7}
-										loop={false}
-										loopFillGroupWithBlank={true}
-										navigation={true}
-										modules={[Navigation]}
+										freeMode={true}
+										grabCursor={true}
+										// pagination={{
+										// 	clickable: true,
+										// }}
+										modules={[FreeMode, Pagination]}
 										speed={1500}
+										breakpoints={{
+											// when window width is >= 1000px
+											1000: {
+												slidesPerView: 7.5,
+												spaceBetween: 20,
+											},
+										}}
 									>
 										{details.similar.results.map((movie) => {
 											return (
