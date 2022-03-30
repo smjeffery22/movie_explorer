@@ -18,10 +18,9 @@ import './App.scss';
 function App() {
 	const [searchValue, setSearchValue] = useState('');
 	const [searchedMovies, setSearchedMovies] = useState([]);
-	const [search, setSearch] = useState(false);
 
 	useEffect(() => {
-		fetchSearchedMovies(searchValue);
+		searchValue !== '' && fetchSearchedMovies(searchValue);
 	}, [searchValue]);
 
 	const handleSearchValue = (search) => setSearchValue(search);
@@ -46,10 +45,22 @@ function App() {
 				/>
 				<Routes>
 					<Route path="/" element={<HomePage searchValue={searchValue} />} />
-					<Route path="/popular" element={<PopularList />} />
-					<Route path="/now-playing" element={<NowPlaying />} />
-					<Route path="/upcoming" element={<Upcoming />} />
-					<Route path="/top-rated" element={<TopRated />} />
+					<Route
+						path="/popular"
+						element={<PopularList searchValue={searchValue} />}
+					/>
+					<Route
+						path="/now-playing"
+						element={<NowPlaying searchValue={searchValue} />}
+					/>
+					<Route
+						path="/upcoming"
+						element={<Upcoming searchValue={searchValue} />}
+					/>
+					<Route
+						path="/top-rated"
+						element={<TopRated searchValue={searchValue} />}
+					/>
 				</Routes>
 				{searchValue && <SearchList searchedMovies={searchedMovies} />}
 			</div>

@@ -1,16 +1,22 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.scss';
 
 const Navbar = ({ searchValue, handleSearchValue }) => {
 	const location = useLocation();
+	const searchRef = useRef(null);
+
+	const clearSearchValue = () => {
+		handleSearchValue('')
+		console.log(document.body)
+	};
 
 	return (
 		<div className="navbar">
 			<div className="navbar-container">
 				<div className="navbar-left">
-					<Link to="/" className="navbar-menu">
+					<Link to="/" className="navbar-menu" onClick={clearSearchValue}>
 						MovieExplorer
 					</Link>
 					<Link
@@ -20,6 +26,7 @@ const Navbar = ({ searchValue, handleSearchValue }) => {
 								? 'navbar-menu active'
 								: 'navbar-menu'
 						}
+						onClick={clearSearchValue}
 					>
 						Popular
 					</Link>
@@ -30,6 +37,7 @@ const Navbar = ({ searchValue, handleSearchValue }) => {
 								? 'navbar-menu active'
 								: 'navbar-menu'
 						}
+						onClick={clearSearchValue}
 					>
 						Now Playing
 					</Link>
@@ -40,6 +48,7 @@ const Navbar = ({ searchValue, handleSearchValue }) => {
 								? 'navbar-menu active'
 								: 'navbar-menu'
 						}
+						onClick={clearSearchValue}
 					>
 						Upcoming
 					</Link>
@@ -50,12 +59,14 @@ const Navbar = ({ searchValue, handleSearchValue }) => {
 								? 'navbar-menu active'
 								: 'navbar-menu'
 						}
+						onClick={clearSearchValue}
 					>
 						Top Rated
 					</Link>
 				</div>
 				<div className="navbar-right">
 					<input
+					ref={searchRef}
 						className="navbar-search"
 						type="text"
 						placeholder="Search movie..."

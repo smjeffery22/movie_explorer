@@ -4,7 +4,7 @@ import ListItem from '../ListItem';
 import Filter from '../../filter/Filter';
 import './Upcoming.scss';
 
-const NowPlaying = () => {
+const NowPlaying = ({ searchValue }) => {
 	const [upcoming, setUpcoming] = useState([]);
 	const [filtered, setFiltered] = useState([]);
 	const [genres, setGenres] = useState([]);
@@ -75,19 +75,23 @@ const NowPlaying = () => {
 	};
 
 	return (
-		<div className="movie-container">
-			<Filter
-				genres={genres}
-				activeGenre={activeGenre}
-				setActiveGenre={setActiveGenre}
-				setFiltered={setFiltered}
-			/>
-			<div className="movie-list">
-				{filtered.map((movie) => {
-					return <ListItem key={movie.id} movie={movie} upcoming />;
-				})}
-			</div>
-		</div>
+		<>
+			{searchValue === '' && (
+				<div className="movie-container">
+					<Filter
+						genres={genres}
+						activeGenre={activeGenre}
+						setActiveGenre={setActiveGenre}
+						setFiltered={setFiltered}
+					/>
+					<div className="movie-list">
+						{filtered.map((movie) => {
+							return <ListItem key={movie.id} movie={movie} upcoming />;
+						})}
+					</div>
+				</div>
+			)}
+		</>
 	);
 };
 

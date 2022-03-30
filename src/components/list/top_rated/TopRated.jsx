@@ -4,7 +4,7 @@ import ListItem from '../ListItem';
 import Filter from '../../filter/Filter';
 import './TopRated.scss';
 
-const TopRated = () => {
+const TopRated = ({ searchValue }) => {
 	const [topRated, setTopRated] = useState([]);
 	const [filtered, setFiltered] = useState([]);
 	const [genres, setGenres] = useState([]);
@@ -75,19 +75,23 @@ const TopRated = () => {
 	};
 
 	return (
-		<div className="movie-container">
-			<Filter
-				genres={genres}
-				activeGenre={activeGenre}
-				setActiveGenre={setActiveGenre}
-				setFiltered={setFiltered}
-			/>
-			<div className="movie-list">
-				{filtered.map((movie) => {
-					return <ListItem key={movie.id} movie={movie} />;
-				})}
-			</div>
-		</div>
+		<>
+			{searchValue === '' && (
+				<div className="movie-container">
+					<Filter
+						genres={genres}
+						activeGenre={activeGenre}
+						setActiveGenre={setActiveGenre}
+						setFiltered={setFiltered}
+					/>
+					<div className="movie-list">
+						{filtered.map((movie) => {
+							return <ListItem key={movie.id} movie={movie} />;
+						})}
+					</div>
+				</div>
+			)}
+		</>
 	);
 };
 

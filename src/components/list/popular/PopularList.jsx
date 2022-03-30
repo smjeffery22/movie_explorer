@@ -4,7 +4,7 @@ import ListItem from '../ListItem';
 import Filter from '../../filter/Filter';
 import './PopularList.scss';
 
-const PopularList = () => {
+const PopularList = ({ searchValue }) => {
 	const [popular, setPopular] = useState([]);
 	const [filtered, setFiltered] = useState([]);
 	const [genres, setGenres] = useState([]);
@@ -37,11 +37,14 @@ const PopularList = () => {
 		const popularMovies2 = await axios.get(
 			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=2`
 		);
-		
+
 		// combine movie data returned from axios calls
-		const movieData = [...popularMovies1.data.results, ...popularMovies2.data.results];
+		const movieData = [
+			...popularMovies1.data.results,
+			...popularMovies2.data.results,
+		];
 		const uniqueMovieIds = [];
-		
+
 		// filter out duplicate movies from the API data
 		//	bug in API data
 		const filteredPopularMovies = movieData.filter((movie) => {
@@ -72,19 +75,23 @@ const PopularList = () => {
 	};
 
 	return (
-		<div className="movie-container">
-			<Filter
-				genres={genres}
-				activeGenre={activeGenre}
-				setActiveGenre={setActiveGenre}
-				setFiltered={setFiltered}
-			/>
-			<div className="movie-list">
-				{filtered.map((movie) => {
-					return <ListItem key={movie.id} movie={movie} />;
-				})}
-			</div>
-		</div>
+		<>
+			{searchValue === '' && (
+				<div className="movie-container">
+					<Filter
+						genres={genres}
+						activeGenre={activeGenre}
+						setActiveGenre={setActiveGenre}
+						setFiltered={setFiltered}
+					/>
+					<div className="movie-list">
+						{filtered.map((movie) => {
+							return <ListItem key={movie.id} movie={movie} />;
+						})}
+					</div>
+				</div>
+			)}
+		</>
 	);
 };
 
