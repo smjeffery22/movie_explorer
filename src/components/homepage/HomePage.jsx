@@ -4,7 +4,7 @@ import Hero from './hero/Hero';
 import MovieSlider from './movie_slider/MovieSlider';
 import './HomePage.scss';
 
-const HomePage = () => {
+const HomePage = ({ searchValue }) => {
 	const [heroMovie, setHeroMovie] = useState({});
 	const [trendingDay, setTrendingDay] = useState([]);
 	const [trendingWeek, setTrendingWeek] = useState([]);
@@ -40,11 +40,15 @@ const HomePage = () => {
 	};
 
 	return (
-		<div className="home">
-			<Hero heroMovie={heroMovie} />
-			<MovieSlider title="Trending Today" movies={trendingDay} />
-			<MovieSlider title="Trending This Week" movies={trendingWeek} />
-		</div>
+		<>
+			{searchValue === '' && (
+				<div className="home">
+					<Hero heroMovie={heroMovie} />
+					<MovieSlider title="Trending Today" movies={trendingDay} />
+					<MovieSlider title="Trending This Week" movies={trendingWeek} />
+				</div>
+			)}
+		</>
 	);
 };
 

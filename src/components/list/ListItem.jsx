@@ -56,6 +56,7 @@ const ListItem = ({ movie, upcoming }) => {
 					<div className="movie-info">
 						<div className="movie-title">{movie.title}</div>
 						{!upcoming && (
+							movie.vote_average === 0 ? 'N/A' :
 							<div className={movieRatingColor(movie.vote_average)}>
 								{movie.vote_average.toFixed(1)}
 							</div>

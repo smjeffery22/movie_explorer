@@ -1,5 +1,10 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from 'react-router-dom';
 import axios from 'axios';
 import HomePage from './components/homepage/HomePage';
 import Navbar from './components/navbar/Navbar';
@@ -13,11 +18,12 @@ import './App.scss';
 function App() {
 	const [searchValue, setSearchValue] = useState('');
 	const [searchedMovies, setSearchedMovies] = useState([]);
+	const [search, setSearch] = useState(false);
 
 	useEffect(() => {
 		fetchSearchedMovies(searchValue);
 	}, [searchValue]);
-	console.log(searchedMovies)
+
 	const handleSearchValue = (search) => setSearchValue(search);
 
 	// fetch searched movies from api
@@ -39,7 +45,7 @@ function App() {
 					handleSearchValue={handleSearchValue}
 				/>
 				<Routes>
-					<Route path="/" element={<HomePage />} />
+					<Route path="/" element={<HomePage searchValue={searchValue} />} />
 					<Route path="/popular" element={<PopularList />} />
 					<Route path="/now-playing" element={<NowPlaying />} />
 					<Route path="/upcoming" element={<Upcoming />} />

@@ -5,13 +5,14 @@ import Filter from '../../filter/Filter';
 import './SearchList.scss';
 
 const SearchList = ({ searchedMovies }) => {
-
+	console.log(searchedMovies);
 	return (
 		<div className="movie-container">
 			<div className="movie-list">
-				{searchedMovies.map((movie) => {
-					return <ListItem key={movie.id} movie={movie} />;
-				})}
+				{searchedMovies.length > 0 &&
+					searchedMovies.map((movie) => {
+						return <ListItem key={movie.id} movie={movie} />;
+					})}
 			</div>
 		</div>
 	);
