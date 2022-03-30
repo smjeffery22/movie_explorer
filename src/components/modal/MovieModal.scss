@@ -82,10 +82,42 @@
 					}
 				}
 
-				.slider-poster {
-					display: block;
+				.slider-poster-container {
 					height: 100%;
-					border-radius: 1.2rem;
+
+					&:hover .slider-poster-overlay {
+						opacity: 1;
+					}
+					
+					.slider-poster-wrapper {
+						height: 90%;
+
+						.slider-poster {
+							display: block;
+							width: 100%;
+							height: 100%;
+							border-radius: 1.2rem;
+							margin-bottom: 0.5rem;
+						}
+					}
+
+					.slider-poster-overlay {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						border-radius: 1.2rem;
+						position: absolute;
+						background-color: rgba(20, 20, 20, 0.5);
+						width: 100%;
+						height: 90%;
+						top: 0%;
+						font-size: 0.9rem;
+						word-wrap: break-word;
+						text-align: center;
+						overflow: hidden;
+						padding: 0.5em;
+						opacity: 0;
+					}
 				}
 			}
 		}

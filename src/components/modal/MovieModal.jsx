@@ -206,9 +206,15 @@ const MovieModal = ({ movie, handleClose }) => {
 										modules={[FreeMode, Pagination]}
 										speed={1500}
 										breakpoints={{
-											// when window width is >= 1000px
-											1000: {
+											// when window width is >= 1200px
+											1200: {
 												slidesPerView: 7.5,
+												spaceBetween: 20,
+											},
+
+											// when window width is >= 1650px
+											1650: {
+												slidesPerView: 9.5,
 												spaceBetween: 20,
 											},
 										}}
@@ -216,15 +222,22 @@ const MovieModal = ({ movie, handleClose }) => {
 										{details.similar.results.map((movie) => {
 											return (
 												<SwiperSlide key={movie.id}>
-													<img
-														className="slider-poster"
-														src={
-															movie.poster_path
-																? `https://image.tmdb.org/t/p/w92${movie.poster_path}`
-																: require('../../assets/no_image.png')
-														}
-														alt=""
-													/>
+													<div className="slider-poster-container">
+														<div className="slider-poster-wrapper">
+															<img
+																className="slider-poster"
+																src={
+																	movie.poster_path
+																		? `https://image.tmdb.org/t/p/w154${movie.poster_path}`
+																		: require('../../assets/no_image.png')
+																}
+																alt=""
+															/>
+														</div>
+														<div className="slider-poster-overlay">
+															{movie.title}
+														</div>
+													</div>
 													<AnimatePresence
 														initial={false}
 														exitBeforeEnter={true}
