@@ -46,6 +46,10 @@ const HomePage = ({ searchValue }) => {
 					<Hero heroMovie={heroMovie} />
 					<MovieSlider title="Trending Today" movies={trendingDay} />
 					<MovieSlider title="Trending This Week" movies={trendingWeek} />
+					<MovieSlider title="Trending Today" movies={trendingDay} />
+					<MovieSlider title="Trending This Week" movies={trendingWeek} />
+					<MovieSlider title="Trending Today" movies={trendingDay} />
+					<MovieSlider title="Trending This Week" movies={trendingWeek} />
 				</div>
 			)}
 		</>

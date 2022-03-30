@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { FaPlay } from 'react-icons/fa';
 import { AiOutlineClose } from 'react-icons/ai';
 
@@ -9,26 +10,13 @@ import Button from '../button/Button';
 import Backdrop from '../backdrop/Backdrop';
 import './MovieModal.scss';
 
-// const dropIn = {
-// 	hidden: {
-// 		y: '-100vh',
-// 		opacity: 0,
-// 	},
-// 	visible: {
-// 		y: 0,
-// 		opacity: 1,
-// 		// transition: {
-// 		// 	duration: 0.1,
-// 		// 	type: 'spring',
-// 		// 	damping: 50,
-// 		// 	stiffness: 250,
-// 		// },
-// 	},
-// 	exit: {
-// 		y: '100vh',
-// 		opacity: 0,
-// 	},
-// };
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+
+// import required modules
+import { Pagination, Navigation } from 'swiper';
 
 const MovieModal = ({ movie, handleClose }) => {
 	const [details, setDetails] = useState({});
@@ -46,7 +34,7 @@ const MovieModal = ({ movie, handleClose }) => {
 		const baseUrl = 'https://api.themoviedb.org/3';
 		const path = `/movie/${movie.id}`;
 		const details = await axios.get(
-			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=videos`
+			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=videos,similar`
 		);
 
 		setDetails(details.data); // move details data in object
@@ -159,46 +147,88 @@ const MovieModal = ({ movie, handleClose }) => {
 				exit={{ opacity: 0 }}
 			>
 				<div className="modal-movie-detail-container">
-					<h1 className="modal-movie-detail-heading">
-						<div>
-							<span>{movie.title}</span>
-							<span>({movie.release_date.slice(0, 4)})</span>
+					<div>
+						<h1 className="modal-movie-detail-heading">
+							<div>
+								<span>{movie.title}</span>
+								<span>({movie.release_date.slice(0, 4)})</span>
+							</div>
+							<div className="modal-movie-detail-trailer-button">
+								<Button
+									trailer="button-trailer"
+									onClick={() => setPlayTrailer(true)}
+								>
+									<FaPlay className="play-button" /> Watch Trailer
+								</Button>
+							</div>
+						</h1>
+						<div className="modal-movie-detail-subheading">
+							<span>{movie.release_date}</span>
+							<span>
+								<strong>&#183;</strong>
+							</span>
+							{Object.keys(details).length !== 0 &&
+								details.genres.map((genre) => {
+									return <span key={genre.id}>{genre.name}</span>;
+								})}
+							<span>
+								<strong>&#183;</strong>
+							</span>
+							{details.runtime < 60 && <span>{details.runtime}</span>}
+							{details.runtime > 60 && <span>{convertRuntime()}</span>}
 						</div>
-						<div className="modal-movie-detail-trailer-button">
-							<Button
-								trailer="button-trailer"
-								onClick={() => setPlayTrailer(true)}
-							>
-								<FaPlay className="play-button" /> Watch Trailer
-							</Button>
+						<div className="modal-movie-detail-people">
+							<div className="modal-movie-detail-director">
+								<strong>Director:</strong> {crews.length > 0 && getDirector()}
+							</div>
+							<div className="modal-movie-detail-casts">
+								<strong>Casts:</strong> {casts.length > 0 && getCasts()}
+							</div>
 						</div>
-					</h1>
-					<div className="modal-movie-detail-subheading">
-						<span>{movie.release_date}</span>
-						<span>
-							<strong>&#183;</strong>
-						</span>
-						{Object.keys(details).length !== 0 &&
-							details.genres.map((genre) => {
-								return <span key={genre.id}>{genre.name}</span>;
-							})}
-						<span>
-							<strong>&#183;</strong>
-						</span>
-						{details.runtime < 60 && <span>{details.runtime}</span>}
-						{details.runtime > 60 && <span>{convertRuntime()}</span>}
+						<div className="modal-movie-detail-overview">
+							<div>Overview</div>
+							<p>{movie.overview}</p>
+						</div>
 					</div>
-					<div className="modal-movie-detail-people">
-						<div className="modal-movie-detail-director">
-							<strong>Director:</strong> {crews.length > 0 && getDirector()}
-						</div>
-						<div className="modal-movie-detail-casts">
-							<strong>Casts:</strong> {casts.length > 0 && getCasts()}
-						</div>
-					</div>
-					<div className="modal-movie-detail-overview">
-						<div>Overview</div>
-						<p>{movie.overview}</p>
+					<div className="modal-movie-detail-similar">
+						{Object.keys(details).length !== 0 && (
+							<>
+								<div className="similar-title">Similar Movies</div>
+								<div className="slider-container">
+									<Swiper
+										slidesPerView={7}
+										spaceBetween={20}
+										slidesPerGroup={7}
+										loop={false}
+										loopFillGroupWithBlank={true}
+										navigation={true}
+										modules={[Navigation]}
+										speed={1500}
+									>
+										{details.similar.results.map((movie) => {
+											return (
+												<SwiperSlide key={movie.id}>
+													<img
+														className="slider-poster"
+														src={
+															movie.poster_path
+																? `https://image.tmdb.org/t/p/w92${movie.poster_path}`
+																: require('../../assets/no_image.png')
+														}
+														alt=""
+													/>
+													<AnimatePresence
+														initial={false}
+														exitBeforeEnter={true}
+														onExitComplete={() => null}
+													></AnimatePresence>
+												</SwiperSlide>
+											);
+										})}
+									</Swiper>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 			</motion.div>
