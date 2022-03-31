@@ -8,6 +8,8 @@ const HomePage = ({ searchValue }) => {
 	const [heroMovie, setHeroMovie] = useState({});
 	const [trendingDay, setTrendingDay] = useState([]);
 	const [trendingWeek, setTrendingWeek] = useState([]);
+	const [recommended, setRecommended] = useState([]);
+	const [random, setRandom] = useState([]);
 
 	useEffect(() => {
 		fetchTrending('day');
@@ -15,16 +17,30 @@ const HomePage = ({ searchValue }) => {
 		fetchRandomTopRated();
 	}, []);
 
-	// fetch one random top rated movie from api
+	// fetch one random top rated movie (+ recommendations and similar movies) from api
 	const fetchRandomTopRated = async () => {
 		const randomNumber19 = Math.floor(Math.random() * 19);
 		const randomNumber100 = Math.floor(Math.random() * 100) + 1;
 		const baseUrl = 'https://api.themoviedb.org/3';
-		const path = '/movie/top_rated';
-		const randomTopRatedMovie = await axios.get(
-			`${baseUrl}${path}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${randomNumber100}`
+		const pathTopRated = '/movie/top_rated';
+		const randomTopRatedMovieData = await axios.get(
+			`${baseUrl}${pathTopRated}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=${randomNumber100}`
 		);
-		setHeroMovie(randomTopRatedMovie.data.results[randomNumber19]);
+		const randomTopRatedMovie = await randomTopRatedMovieData.data.results[
+			randomNumber19
+		];
+
+		// fetch recommendations and similar movies from the top rated movie fetched above
+		const pathDetails = `/movie/${randomTopRatedMovie.id}`;
+		const detailsMovieData = await axios.get(
+			`${baseUrl}${pathDetails}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=recommendations,similar`
+		);
+
+		console.log(randomTopRatedMovie);
+		console.log(detailsMovieData);
+		setHeroMovie(randomTopRatedMovie);
+		setRecommended(detailsMovieData.data.recommendations.results);
+		setRandom(detailsMovieData.data.similar.results);
 	};
 
 	// fetch daily/weekly trending movies from api
@@ -46,10 +62,8 @@ const HomePage = ({ searchValue }) => {
 					<Hero heroMovie={heroMovie} />
 					<MovieSlider title="Trending Today" movies={trendingDay} />
 					<MovieSlider title="Trending This Week" movies={trendingWeek} />
-					<MovieSlider title="Trending Today" movies={trendingDay} />
-					<MovieSlider title="Trending This Week" movies={trendingWeek} />
-					<MovieSlider title="Trending Today" movies={trendingDay} />
-					<MovieSlider title="Trending This Week" movies={trendingWeek} />
+					<MovieSlider title="Recommendations" movies={recommended} />
+					<MovieSlider title="Random" movies={random} />
 				</div>
 			)}
 		</>

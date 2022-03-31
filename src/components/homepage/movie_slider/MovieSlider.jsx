@@ -48,29 +48,34 @@ const MovieSlider = ({ title, movies }) => {
 						},
 					}}
 				>
-					{movies.map((movie) => {
-						return (
-							<SwiperSlide key={movie.id} onClick={() => clickedMovie(movie)}>
-								<img
-									className="slider-poster"
-									src={
-										movie.poster_path
-											? `https://image.tmdb.org/t/p/w154${movie.poster_path}`
-											: require('../../../assets/no_image.png')
-									}
-									alt=""
-								/>
-								<AnimatePresence
-									initial={false}
-									exitBeforeEnter={true}
-									onExitComplete={() => null}
-								></AnimatePresence>
-							</SwiperSlide>
-						);
-					})}
+					{movies &&
+						movies.map((movie) => {
+							return (
+								<SwiperSlide key={movie.id} onClick={() => clickedMovie(movie)}>
+									<img
+										className="slider-poster"
+										src={
+											movie.poster_path
+												? `https://image.tmdb.org/t/p/w154${movie.poster_path}`
+												: require('../../../assets/no_image.png')
+										}
+										alt=""
+									/>
+									<AnimatePresence
+										initial={false}
+										exitBeforeEnter={true}
+										onExitComplete={() => null}
+									></AnimatePresence>
+								</SwiperSlide>
+							);
+						})}
 				</Swiper>
 				{modalOpen && selectedMovie && (
-					<MovieModal movie={selectedMovie} modalOpen={modalOpen} handleClose={close} />
+					<MovieModal
+						movie={selectedMovie}
+						modalOpen={modalOpen}
+						handleClose={close}
+					/>
 				)}
 			</div>
 		</div>
