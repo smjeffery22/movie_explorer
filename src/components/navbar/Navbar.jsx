@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
 import './Navbar.scss';

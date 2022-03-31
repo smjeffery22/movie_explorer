@@ -3,7 +3,6 @@ import {
 	BrowserRouter as Router,
 	Routes,
 	Route,
-	Navigate,
 } from 'react-router-dom';
 import axios from 'axios';
 import HomePage from './components/homepage/HomePage';

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { AnimatePresence } from 'framer-motion';
 import MovieModal from '../../modal/MovieModal';
 import './MovieSlider.scss';
 
@@ -10,7 +9,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // import required modules
-import { Pagination, Navigation } from 'swiper';
+import { Navigation } from 'swiper';
 
 const MovieSlider = ({ title, movies }) => {
 	const [modalOpen, setModalOpen] = useState(false);

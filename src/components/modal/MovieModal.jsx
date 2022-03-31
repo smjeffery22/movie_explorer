@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import YouTube from 'react-youtube';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FaPlay } from 'react-icons/fa';
-import { AiOutlineClose } from 'react-icons/ai';
 
 import Button from '../button/Button';
 import Backdrop from '../backdrop/Backdrop';

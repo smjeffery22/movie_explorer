@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
 import ListItem from '../ListItem';
-import Filter from '../../filter/Filter';
 import './SearchList.scss';
 
 const SearchList = ({ searchedMovies }) => {
