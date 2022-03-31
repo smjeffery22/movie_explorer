@@ -61,17 +61,13 @@ const MovieSlider = ({ title, movies }) => {
 										}
 										alt=""
 									/>
-									<AnimatePresence
-										initial={false}
-										exitBeforeEnter={true}
-										onExitComplete={() => null}
-									></AnimatePresence>
 								</SwiperSlide>
 							);
 						})}
 				</Swiper>
 				{modalOpen && selectedMovie && (
 					<MovieModal
+						noHover='no-hover' 
 						movie={selectedMovie}
 						modalOpen={modalOpen}
 						handleClose={close}

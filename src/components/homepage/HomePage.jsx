@@ -36,8 +36,6 @@ const HomePage = ({ searchValue }) => {
 			`${baseUrl}${pathDetails}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&append_to_response=recommendations,similar`
 		);
 
-		console.log(randomTopRatedMovie);
-		console.log(detailsMovieData);
 		setHeroMovie(randomTopRatedMovie);
 		setRecommended(detailsMovieData.data.recommendations.results);
 		setRandom(detailsMovieData.data.similar.results);

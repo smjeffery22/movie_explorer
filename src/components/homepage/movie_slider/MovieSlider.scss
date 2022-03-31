@@ -32,6 +32,7 @@
 			padding: 20px 0;
 
 			.swiper-slide {
+
 				&:hover {
 					transition: all 0.2s ease-in-out;
 					transform: scale(1.1);
@@ -47,10 +48,28 @@
 					margin: 0 -10px;
 				}
 
+				// hover effect on different nth movie since slides per view changes
+				@media (max-width: 1199px) {
+					&:nth-child(5n + 1):hover {
+						margin: 0 10px;
+					}
+
+					&:nth-child(5n):hover {
+						margin: 0 -10px;
+					}
+				}
+
 				.slider-poster {
 					display: block;
 					width: 100%;
 					border-radius: 1.2rem;
+				}
+
+				// exclude hover effect for movie modal opened from the home page
+				&.no-hover:hover {
+					transition: none;
+					transform: none;
+					margin: 0;
 				}
 			}
 		}

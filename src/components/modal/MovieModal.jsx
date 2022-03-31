@@ -18,7 +18,7 @@ import 'swiper/css/navigation';
 // import required modules
 import { Pagination, FreeMode } from 'swiper';
 
-const MovieModal = ({ movie, handleClose }) => {
+const MovieModal = ({ movie, handleClose, noHover }) => {
 	const [details, setDetails] = useState({});
 	const [casts, setCasts] = useState([]);
 	const [crews, setCrews] = useState([]);
@@ -222,7 +222,7 @@ const MovieModal = ({ movie, handleClose }) => {
 									>
 										{details.similar.results.map((movie) => {
 											return (
-												<SwiperSlide key={movie.id}>
+												<SwiperSlide className={noHover} key={movie.id}>
 													<div className="slider-poster-container">
 														<div className="slider-poster-wrapper">
 															<img
@@ -239,11 +239,6 @@ const MovieModal = ({ movie, handleClose }) => {
 															{movie.title}
 														</div>
 													</div>
-													<AnimatePresence
-														initial={false}
-														exitBeforeEnter={true}
-														onExitComplete={() => null}
-													></AnimatePresence>
 												</SwiperSlide>
 											);
 										})}
