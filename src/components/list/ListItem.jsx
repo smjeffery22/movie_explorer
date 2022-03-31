@@ -37,8 +37,8 @@ const ListItem = ({ movie, upcoming }) => {
 		<AnimatePresence>
 			<motion.div
 				className="movie-item"
-				whileHover={{ scale: 1.2 }}
-				whileTap={{ scale: 1.1 }}
+				whileHover={{ scale: 1.05 }}
+				whileTap={{ scale: 1 }}
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
